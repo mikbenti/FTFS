@@ -517,6 +517,59 @@
     }
 
 
+
+    .language-switcher {
+      position: fixed;
+      right: 28px;
+      top: 28px;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--black);
+      border: 2px solid var(--ftfs-red);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 18px 36px rgba(11, 11, 13, 0.28);
+    }
+
+    .language-switcher button {
+      border: 0;
+      padding: 12px 15px;
+      background: var(--black);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .language-switcher button.active {
+      background: var(--ftfs-red);
+      color: var(--white);
+    }
+
+    .language-switcher button:hover {
+      background: var(--charcoal);
+    }
+
+    .language-switcher button.active:hover {
+      background: var(--ftfs-red);
+    }
+
+    @media (max-width: 760px) {
+      .language-switcher {
+        top: 12px;
+        right: 12px;
+      }
+      .language-switcher button {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+    }
+
     .pdf-download-fixed {
       position: fixed;
       right: 28px;
@@ -566,7 +619,60 @@
     }
 
     @media (max-width: 760px) {
-      .pdf-download-fixed {
+  
+    .language-switcher {
+      position: fixed;
+      right: 28px;
+      top: 28px;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--black);
+      border: 2px solid var(--ftfs-red);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 18px 36px rgba(11, 11, 13, 0.28);
+    }
+
+    .language-switcher button {
+      border: 0;
+      padding: 12px 15px;
+      background: var(--black);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .language-switcher button.active {
+      background: var(--ftfs-red);
+      color: var(--white);
+    }
+
+    .language-switcher button:hover {
+      background: var(--charcoal);
+    }
+
+    .language-switcher button.active:hover {
+      background: var(--ftfs-red);
+    }
+
+    @media (max-width: 760px) {
+      .language-switcher {
+        top: 12px;
+        right: 12px;
+      }
+      .language-switcher button {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+    }
+
+    .pdf-download-fixed {
         right: 16px;
         bottom: 16px;
         padding: 11px 14px;
@@ -596,6 +702,12 @@
 </head>
 
 <body>
+
+  <div class="language-switcher" aria-label="Language selector">
+    <button id="btn-en" class="active" type="button" onclick="setLanguage('en')">EN</button>
+    <button id="btn-es" type="button" onclick="setLanguage('es')">ES</button>
+  </div>
+
   <a class="pdf-download-fixed" href="#" onclick="forceDownloadPDF(event)">Download PDF</a>
 
   <div class="app">
@@ -1101,14 +1213,129 @@
 
   <script>
 
+    const pdfFiles = {
+      en: "FTFS_Quality_Governance_Model_EN.pdf",
+      es: "FTFS_Modelo_Gobernanza_Calidad_ES.pdf"
+    };
+
+    let currentLanguage = "en";
+
+    const esMap = new Map([
+      ["Download PDF", "Descargar PDF"],
+      ["FTFS Peru Platform", "Plataforma FTFS Perú"],
+      ["Quality Governance Model", "Modelo de Gobernanza de Calidad"],
+      ["Peru application, scalable to other origins with local adaptation.", "Aplicación Perú, escalable a otros orígenes con adaptación local."],
+      ["Operating model canvas", "Canvas de modelo operativo"],
+      ["One Standard. Multiple Growers. Consistent Arrivals.", "Un Estándar. Múltiples Productores. Arribos Consistentes."],
+      ["A governance model for FTFS Peru to manage fruit from different growers, fields and packhouses under one technical standard, with clear release criteria, traceability, early warning signals, timely escalation, arrival feedback and continuous improvement. The model is designed for Peru and can be scaled to other origins, adapted to each origin’s operational reality.", "Un modelo de gobernanza para que FTFS Perú gestione fruta de distintos productores, campos y packhouses bajo un único estándar técnico, con criterios claros de liberación, trazabilidad, señales tempranas de alerta, escalamiento oportuno, feedback de arribo y mejora continua. El modelo está diseñado para Perú y puede escalarse a otros orígenes, adaptado a la realidad operativa de cada uno."],
+      ["Technical Standard", "Estándar Técnico"],
+      ["Quality Layers", "Capas de Calidad"],
+      ["Critical Control Points", "Puntos Críticos de Control"],
+      ["Field-to-Arrival Traceability", "Trazabilidad Campo–Arribo"],
+      ["Model Sections", "Secciones del Modelo"],
+      ["01 · Overview", "01 · Resumen"],
+      ["02 · Mandate", "02 · Mandato"],
+      ["03 · Quality Layers", "03 · Capas de Calidad"],
+      ["04 · Organization", "04 · Organización"],
+      ["05 · Allocation Matrix", "05 · Matriz de Asignación"],
+      ["06 · Lot Release", "06 · Liberación de Lotes"],
+      ["07 · Governance KPIs", "07 · KPIs de Gobernanza"],
+      ["08 · Grower Governance", "08 · Gobernanza de Productores"],
+      ["09 · Claims & RCA", "09 · Reclamos y RCA"],
+      ["10 · Commercial Link", "10 · Vínculo Comercial"],
+      ["11 · Program Strategy", "11 · Estrategia del Programa"],
+      ["12 · Governance Rhythm", "12 · Ritmo de Gobernanza"],
+      ["13 · Required Authority", "13 · Autoridad Requerida"],
+      ["14 · Executive Summary", "14 · Resumen Ejecutivo"],
+
+      ["FTFS Quality Governance Flow", "Flujo de Gobernanza de Calidad FTFS"],
+      ["From FTF market expectations to operational execution, early warnings, commercial compliance, arrival feedback and system improvement.", "Desde las expectativas de mercado de FTF hasta la ejecución operativa, alertas tempranas, cumplimiento comercial, feedback de arribo y mejora del sistema."],
+      ["Mandate of FTFS Quality Governance", "Mandato de la Gobernanza de Calidad FTFS"],
+      ["Quality governance must convert expectations into standards, standards into controls, and controls into reliable arrivals.", "La gobernanza de calidad debe convertir expectativas en estándares, estándares en controles y controles en arribos confiables."],
+      ["Three Layers of FTFS Quality Governance", "Tres Capas de Gobernanza de Calidad FTFS"],
+      ["This separates fruit quality from process discipline and governance capability.", "Esto separa la calidad de fruta de la disciplina de proceso y de la capacidad de gobernanza."],
+      ["Organization Model", "Modelo Organizacional"],
+      ["FTFS sets and governs the quality standard. Field, packing and logistics teams execute the controls. Growers and packhouses remain accountable for compliance.", "FTFS define y gobierna el estándar de calidad. Los equipos de campo, packing y logística ejecutan los controles. Productores y packhouses mantienen la responsabilidad por el cumplimiento."],
+      ["Quality Allocation Matrix", "Matriz de Asignación de Calidad"],
+      ["Fruit should not be allocated only by availability or volume. Allocation must reflect product condition, grower reliability, packhouse performance, logistics risk, commercial compliance, market requirements and customer tolerance.", "La fruta no debe asignarse solo por disponibilidad o volumen. La asignación debe reflejar condición de producto, confiabilidad del productor, performance del packhouse, riesgo logístico, cumplimiento comercial, requisitos de mercado y tolerancia del cliente."],
+      ["Lot Release & Commercial Allocation", "Liberación de Lotes y Asignación Comercial"],
+      ["Technical release must define whether each lot is fit to ship, under what restrictions, and for which market or customer it is commercially and technically suitable.", "La liberación técnica debe definir si cada lote es apto para embarque, bajo qué restricciones y para qué mercado o cliente es comercial y técnicamente adecuado."],
+      ["FTFS Quality Governance KPIs", "KPIs de Gobernanza de Calidad FTFS"],
+      ["FTFS should measure quality performance across the full chain: field, harvest, packing, commercial compliance, cold chain, arrival, claims and corrective actions.", "FTFS debe medir la performance de calidad en toda la cadena: campo, cosecha, packing, cumplimiento comercial, cadena de frío, arribo, reclamos y acciones correctivas."],
+      ["Grower Governance", "Gobernanza de Productores"],
+      ["Grower trust should be earned through consistent performance, not assumed by volume or relationship.", "La confianza en el productor debe ganarse con performance consistente, no asumirse por volumen o relación."],
+      ["Claims Management & Root Cause Analysis", "Gestión de Reclamos y Análisis de Causa Raíz"],
+      ["A claim closed only with a credit note is a lost learning opportunity. Every claim must lead to root-cause analysis, accountability and corrective action.", "Un reclamo cerrado solo con una nota de crédito es una oportunidad de aprendizaje perdida. Todo reclamo debe conducir a análisis de causa raíz, responsabilidad y acción correctiva."],
+      ["Quality as a Commercial Value Enabler", "Calidad como Habilitador de Valor Comercial"],
+      ["Quality does not replace Commercial. It defines the technical boundaries and risk profile that allow Commercial to maximize value safely.", "Calidad no reemplaza a Comercial. Define los límites técnicos y el perfil de riesgo que permiten a Comercial maximizar valor de forma segura."],
+      ["Feedback to Variety & Program Strategy", "Feedback a la Estrategia Varietal y del Programa"],
+      ["The best varieties are not only productive. They must travel well, comply commercially, arrive well and sell well.", "Las mejores variedades no son solo productivas. Deben viajar bien, cumplir comercialmente, arribar bien y venderse bien."],
+      ["Governance Rhythm", "Ritmo de Gobernanza"],
+      ["Quality governance requires a defined management rhythm, clear escalation rules and explicit decision rights.", "La gobernanza de calidad requiere un ritmo de gestión definido, reglas claras de escalamiento y derechos explícitos de decisión."],
+      ["Required Authority", "Autoridad Requerida"],
+      ["Without authority, FTFS Quality Governance becomes advisory. With authority, data and escalation rights, it becomes a value-protection system for the program.", "Sin autoridad, la Gobernanza de Calidad FTFS se vuelve consultiva. Con autoridad, datos y derechos de escalamiento, se convierte en un sistema de protección de valor para el programa."],
+      ["Executive Summary", "Resumen Ejecutivo"],
+      ["The closing thesis of the FTFS Quality Governance Model.", "La tesis de cierre del Modelo de Gobernanza de Calidad FTFS."]
+    ]);
+
+    function getTextNodes(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement && ["SCRIPT", "STYLE"].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      return nodes;
+    }
+
+    function initializeOriginalText() {
+      getTextNodes(document.body).forEach(node => {
+        if (!node.parentElement.closest(".language-switcher")) {
+          node.parentElement.dataset.originalText = node.parentElement.dataset.originalText || node.parentElement.textContent;
+        }
+      });
+    }
+
+    function setLanguage(lang) {
+      currentLanguage = lang;
+      document.documentElement.lang = lang;
+
+      document.getElementById("btn-en")?.classList.toggle("active", lang === "en");
+      document.getElementById("btn-es")?.classList.toggle("active", lang === "es");
+
+      document.querySelectorAll(".pdf-download-fixed, .pdf-download-inline").forEach(el => {
+        el.textContent = lang === "es" ? "Descargar PDF" : "Download PDF";
+      });
+
+      getTextNodes(document.body).forEach(node => {
+        if (node.parentElement.closest(".language-switcher")) return;
+        const original = node.nodeValue.trim();
+
+        if (lang === "es" && esMap.has(original)) {
+          node.nodeValue = node.nodeValue.replace(original, esMap.get(original));
+        } else if (lang === "en") {
+          for (const [en, es] of esMap.entries()) {
+            if (original === es) {
+              node.nodeValue = node.nodeValue.replace(original, en);
+              break;
+            }
+          }
+        }
+      });
+
+      localStorage.setItem("ftfs-language", lang);
+    }
+
     async function forceDownloadPDF(event) {
       event.preventDefault();
 
-      const fileName = "FTFS_Quality_Governance_Model.pdf";
-      const fallbackUrl = fileName;
+      const fileName = pdfFiles[currentLanguage] || pdfFiles.en;
 
       try {
-        const response = await fetch(fallbackUrl, { cache: "no-store" });
+        const response = await fetch(fileName, { cache: "no-store" });
 
         if (!response.ok) {
           throw new Error("PDF file not found or unavailable.");
@@ -1126,9 +1353,15 @@
         link.remove();
         window.URL.revokeObjectURL(blobUrl);
       } catch (error) {
-        window.open(fallbackUrl, "_blank");
+        window.open(fileName, "_blank");
       }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedLang = localStorage.getItem("ftfs-language") || "en";
+      setLanguage(savedLang);
+    });
+
 
     const buttons = document.querySelectorAll('.nav-btn');
     const sections = document.querySelectorAll('.section');
