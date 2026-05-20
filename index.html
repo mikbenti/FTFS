@@ -516,6 +516,64 @@
       text-align: right;
     }
 
+
+    .pdf-download-fixed {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 6px;
+      padding: 13px 18px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-left: 6px solid var(--ftfs-red);
+      box-shadow: 0 18px 36px rgba(11, 11, 13, 0.24);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .pdf-download-fixed:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 42px rgba(11, 11, 13, 0.30);
+      background: var(--charcoal);
+    }
+
+    .pdf-download-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 6px;
+      padding: 12px 17px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-left: 6px solid var(--ftfs-red);
+      box-shadow: 0 12px 24px rgba(11, 11, 13, 0.16);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 760px) {
+      .pdf-download-fixed {
+        right: 16px;
+        bottom: 16px;
+        padding: 11px 14px;
+        font-size: 11px;
+      }
+    }
+
     @media (max-width: 1180px) {
       .app { grid-template-columns: 1fr; }
       aside {
@@ -538,6 +596,8 @@
 </head>
 
 <body>
+  <a class="pdf-download-fixed" href="FTFS_Quality_Governance_Model.pdf" download>Download PDF</a>
+
   <div class="app">
     <aside>
       <div class="brand">
@@ -577,7 +637,7 @@
           </div>
           <h1>One Standard. Multiple Growers. Consistent Arrivals.</h1>
           <p class="subtitle">
-            A governance model for FTFS Peru to manage fruit from different growers, fields and packhouses under one technical standard, with clear release criteria, traceability, arrival feedback and continuous improvement. The model is designed for Peru and can be scaled to other origins, adapted to each origin’s operational reality.
+            A governance model for FTFS Peru to manage fruit from different growers, fields and packhouses under one technical standard, with clear release criteria, traceability, early warning signals, timely escalation, arrival feedback and continuous improvement. The model is designed for Peru and can be scaled to other origins, adapted to each origin’s operational reality.
           </p>
           <div class="hero-metrics">
             <div class="metric-card"><div class="metric-value">01</div><div class="metric-label">Technical Standard</div></div>
@@ -591,15 +651,15 @@
       <section id="overview" class="section active">
         <div class="section-title-row">
           <h2>FTFS Quality Governance Flow</h2>
-          <div class="section-note">From FTF market expectations to operational execution, commercial compliance, arrival feedback and system improvement.</div>
+          <div class="section-note">From FTF market expectations to operational execution, early warnings, commercial compliance, arrival feedback and system improvement.</div>
         </div>
         <div class="flow">
           <div class="flow-step"><div class="step-number">1</div><div class="step-title">FTF Market & Customer Expectations</div><div class="step-desc">Programs, customer requirements, commercial promise and risk tolerance.</div></div>
           <div class="flow-step"><div class="step-number">2</div><div class="step-title">FTFS Technical Standard</div><div class="step-desc">Measurable standard by product, variety, grower, format, market and customer.</div></div>
           <div class="flow-step"><div class="step-number">3</div><div class="step-title">Grower & Packhouse Execution</div><div class="step-desc">Protocols, audits, controls, training, traceability and compliance.</div></div>
           <div class="flow-step"><div class="step-number">4</div><div class="step-title">Commercial Compliance at Origin</div><div class="step-desc">Packaging, label, pack configuration, customer code, traceability and weight integrity.</div></div>
-          <div class="flow-step"><div class="step-number">5</div><div class="step-title">Lot Release & Allocation</div><div class="step-desc">Release, restrict or block based on condition, compliance, weight and customer fit.</div></div>
-          <div class="flow-step"><div class="step-number">6</div><div class="step-title">Cold Chain & Logistics</div><div class="step-desc">Cooling discipline, pulp temperature, container performance and transit risk.</div></div>
+          <div class="flow-step"><div class="step-number">5</div><div class="step-title">Lot Release & Allocation</div><div class="step-desc">Release, restrict, block or alert early based on condition, compliance, weight, logistics risk and customer fit.</div></div>
+          <div class="flow-step"><div class="step-number">6</div><div class="step-title">Cold Chain & Logistics</div><div class="step-desc">Cooling discipline, pulp temperature, container performance, transit risk and timely alerts to destination.</div></div>
           <div class="flow-step"><div class="step-number">7</div><div class="step-title">Arrival Confirmation</div><div class="step-desc">Destination confirms condition, packaging, labeling, weight and customer acceptance.</div></div>
           <div class="flow-step"><div class="step-number">8</div><div class="step-title">RCA & Improvement</div><div class="step-desc">Claims, root-cause analysis, corrective actions, scorecards and protocol updates.</div></div>
         </div>
@@ -613,19 +673,21 @@
         <div class="grid grid-2">
           <div class="quote">
             FTFS Quality Governance converts FTF market expectations and customer requirements into measurable technical standards, and governs their execution across growers, fields, packhouses and logistics within the Peru platform.
-            <small>Its purpose is to protect program value, reduce variability, ensure reliable arrivals and enable better commercial allocation decisions.</small>
+            <small>Its purpose is to protect program value, reduce variability, ensure reliable arrivals, anticipate risks and enable better commercial allocation decisions.</small>
           </div>
           <div class="card">
             <div class="card-title">Core Responsibilities</div>
             <span class="pill blue">Define technical standards</span>
             <span class="pill green">Govern grower compliance</span>
             <span class="pill orange">Anticipate quality risks</span>
+            <span class="pill purple">Trigger timely alerts</span>
             <span class="pill red">Lead claims and RCA</span>
             <ul>
               <li>Protect the FTF / MBO program promise.</li>
               <li>Reduce quality variability across growers, fields and packhouses.</li>
               <li>Benchmark growers, packhouses, varieties and production units.</li>
               <li>Control product release and commercial restrictions.</li>
+              <li>Provide early warnings to maximize flexibility for destination strategy adjustments.</li>
               <li>Close the loop through root-cause analysis and corrective actions.</li>
             </ul>
           </div>
@@ -669,6 +731,7 @@
               <li>Net weight and overweight control</li>
               <li>Cold chain integrity</li>
               <li>Transit condition</li>
+              <li>Early warning and timely escalation discipline</li>
             </ul>
           </div>
           <div class="card">
@@ -717,7 +780,7 @@
               <li>Audits growers, fields and packhouses</li>
               <li>Controls harvest, packing and pre-shipment checks</li>
               <li>Monitors cold chain and logistics conditions</li>
-              <li>Reports deviations and quality alerts</li>
+              <li>Reports deviations, quality alerts and destination-relevant risks on time</li>
               <li>Executes corrective action follow-up</li>
             </ul>
           </div>
@@ -753,6 +816,7 @@
             <tr><td>Lot Condition</td><td>Actual condition at harvest, packing and pre-shipment</td><td>Defines whether fruit is released, restricted or blocked.</td></tr>
             <tr><td>Commercial Compliance at Origin</td><td>Correct packaging, pack configuration, labeling, customer codes, traceability, net weight and overweight target</td><td>Prevents customer rejection, relabeling costs, underweight claims, commercial disruptions and loss of program credibility.</td></tr>
             <tr><td>Logistics</td><td>Cooling performance, transit time and cold chain risk</td><td>Defines destination risk and shelf-life protection.</td></tr>
+            <tr><td>Early Warning / Escalation</td><td>Timely communication of quality, compliance, logistics or arrival risk before the issue reaches destination</td><td>Maximizes flexibility to adjust destination strategy, customer allocation, inspection planning, repacking, relabeling or commercial handling.</td></tr>
             <tr><td>Market</td><td>Transit distance, regulatory requirements and expected handling</td><td>Defines minimum condition needed for safe arrival.</td></tr>
             <tr><td>Customer</td><td>Program specification, tolerance and claim sensitivity</td><td>Defines final allocation and restriction level.</td></tr>
             <tr><td>Format</td><td>Pack style, unit size, carton configuration and presentation requirement</td><td>Defines customer compatibility, handling exposure, weight behavior and commercial compliance risk.</td></tr>
@@ -801,7 +865,7 @@
             </ul>
           </div>
         </div>
-        <div class="callout"><strong>Release decision =</strong> fruit condition + commercial compliance + weight integrity + logistics risk + customer fit. Commercial pressure cannot override release criteria.</div>
+        <div class="callout"><strong>Release decision =</strong> fruit condition + commercial compliance + weight integrity + logistics risk + customer fit. Commercial pressure cannot override release criteria. Early warnings must be issued while there is still time to adjust destination strategy.</div>
       </section>
 
       <section id="kpis" class="section">
@@ -824,7 +888,9 @@
           <span class="pill orange">Corrective action closure %</span>
           <span class="pill red">Repeat deviation rate</span>
           <span class="pill purple">Audit compliance %</span>
+          <span class="pill blue">Early warning lead time</span>
           <ul>
+            <li>Destination risk alerts issued on time %</li>
             <li>Claims root-cause closure %</li>
             <li>Critical deviation response time</li>
             <li>Training completion %</li>
@@ -909,6 +975,7 @@
               <li>Packhouse performance</li>
               <li>Arrival feedback</li>
               <li>Shelf-life intelligence</li>
+              <li>Early warnings and destination risk alerts</li>
               <li>Claims and RCA insights</li>
             </ul>
           </div>
@@ -922,11 +989,12 @@
               <li>Volume planning</li>
               <li>Customer relationship</li>
               <li>Final commercial execution</li>
+              <li>Destination strategy adjustment when timely alerts are received</li>
               <li>Value maximization within technical boundaries</li>
             </ul>
           </div>
         </div>
-        <div class="callout"><strong>Key principle:</strong> Quality defines the risk. Commercial decides the value strategy within that risk. The best commercial decision is not always the highest price destination; it is the destination that maximizes expected value after quality and logistics risk.</div>
+        <div class="callout"><strong>Key principle:</strong> Quality defines the risk. Commercial decides the value strategy within that risk. The best commercial decision is not always the highest price destination; it is the destination that maximizes expected value after quality and logistics risk. Timely alerts increase the available options before fruit arrives.</div>
       </section>
 
       <section id="strategy" class="section">
@@ -957,7 +1025,7 @@
               <li>Fruit to be harvested</li>
               <li>Fruit packed / released</li>
               <li>Fruit in transit</li>
-              <li>Quality alerts</li>
+              <li>Quality alerts and destination-relevant early warnings</li>
               <li>Commercial and weight compliance issues</li>
               <li>Restricted or blocked lots</li>
               <li>Corrective actions in progress</li>
@@ -1004,7 +1072,7 @@
           <div class="card compact"><div class="card-title">Verify</div><p>Verify compliance across growers, fields, packhouses, commercial specifications, cold chain and pre-shipment release.</p></div>
           <div class="card compact"><div class="card-title">Restrict</div><p>Restrict lots, growers, packhouses, markets or customers when the risk profile does not support the intended allocation.</p></div>
           <div class="card compact"><div class="card-title">Block</div><p>Block lots that do not meet minimum fruit condition, commercial compliance or weight integrity requirements.</p></div>
-          <div class="card compact"><div class="card-title">Escalate</div><p>Escalate critical deviations, repeated failures, customer-sensitive issues or unresolved corrective actions to FTFS management.</p></div>
+          <div class="card compact"><div class="card-title">Escalate</div><p>Escalate critical deviations, repeated failures, customer-sensitive issues, destination-relevant risks or unresolved corrective actions to FTFS management and Commercial while adjustment options still exist.</p></div>
           <div class="card compact"><div class="card-title">Correct</div><p>Require corrective action plans, verify closure and update protocols when repeated deviations show a system weakness.</p></div>
         </div>
         <div class="callout"><strong>FTFS Quality Governance must have enough authority to protect the program before risk reaches the customer.</strong> Authority must be tied to data, traceability and clearly defined release criteria.</div>
@@ -1017,14 +1085,14 @@
         </div>
         <div class="quote">
           FTFS Quality Governance is the system that allows the Peru platform to convert a diverse network of growers, fields and packhouses into one consistent, reliable and commercially disciplined supply program.
-          <small>The purpose of FTFS Quality Governance is not only to avoid claims. It is to protect program value, ensure reliable arrivals and enable better commercial decisions through discipline, data and accountability.</small>
+          <small>The purpose of FTFS Quality Governance is not only to avoid claims. It is to protect program value, anticipate risk, ensure reliable arrivals and enable better commercial decisions through discipline, data, timely alerts and accountability.</small>
         </div>
         <div class="grid grid-5" style="margin-top:18px;">
           <div class="card compact"><div class="card-title">One technical standard</div><p>Common criteria for growers, fields, packhouses, lots, formats and customers.</p></div>
           <div class="card compact"><div class="card-title">Clear accountability</div><p>FTFS governs the system while growers and packhouses remain responsible for compliance.</p></div>
           <div class="card compact"><div class="card-title">Disciplined release</div><p>Release decisions based on fruit condition, commercial compliance and weight integrity.</p></div>
           <div class="card compact"><div class="card-title">Full traceability</div><p>Field-to-arrival visibility for performance, claims and corrective action.</p></div>
-          <div class="card compact"><div class="card-title">Continuous improvement</div><p>Claims, RCA, scorecards and governance rhythm drive system learning.</p></div>
+          <div class="card compact"><div class="card-title">Continuous improvement</div><p>Claims, RCA, scorecards, early warnings and governance rhythm drive system learning.</p></div>
         </div>
         <div class="footer">FTFS Peru · Quality Governance Model · Draft for internal discussion</div>
       </section>
