@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FTFS | Global Quality Operating Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102A43;--blue:#1F6FEB;--blueSoft:#E8F1FF;--green:#1F8A5B;--greenSoft:#E8F7EF;--orange:#F59E0B;--orangeSoft:#FFF4DA;--red:#C2410C;--redSoft:#FFEDE5;--text:#1F2937;--muted:#6B7280;--line:#E5E7EB;--bg:#F3F4F6;--white:#fff;--shadow:0 18px 45px rgba(15,23,42,.12)}
+*{box-sizing:border-box}body{margin:0;font-family:Montserrat,system-ui,sans-serif;background:linear-gradient(135deg,#F8FAFC,#EEF4FF);color:var(--text)}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}aside{background:var(--navy);color:white;padding:28px 22px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand-kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9CC3FF;font-weight:700;margin-bottom:8px}.brand-title{font-size:22px;line-height:1.1;font-weight:800;margin-bottom:28px}
+.nav-section-title{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#A7B4C7;font-weight:700;margin:24px 0 12px}.nav-btn{width:100%;border:0;border-radius:14px;padding:12px 13px;color:#DCE7F7;background:transparent;font-family:inherit;font-size:13px;font-weight:600;text-align:left;cursor:pointer;transition:.2s}.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,.12);color:white;transform:translateX(2px)}
+main{padding:34px}.hero{background:white;border-radius:34px;padding:34px;box-shadow:var(--shadow);margin-bottom:26px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-120px;top:-130px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(31,111,235,.25),rgba(31,111,235,0))}.hero>*{position:relative;z-index:1}.eyebrow{color:var(--blue);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;margin-bottom:12px}h1{margin:0;font-size:clamp(32px,4vw,54px);line-height:1;color:var(--navy);letter-spacing:-.04em}.subtitle{max-width:980px;font-size:18px;line-height:1.55;color:#374151;margin:18px 0 28px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{border-radius:22px;background:var(--bg);padding:18px;border:1px solid var(--line)}.metric strong{font-size:28px;color:var(--navy)}.metric span{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.section{display:none;animation:fadeIn .25s}.section.active{display:block}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px}h2{margin:0;color:var(--navy);font-size:28px;letter-spacing:-.03em}.note{color:var(--muted);font-size:13px;font-weight:600;max-width:560px;text-align:right}
+.grid{display:grid;gap:18px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:white;border-radius:24px;padding:24px;box-shadow:var(--shadow);border:1px solid rgba(226,232,240,.8)}.card.small{padding:18px}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--blue);margin-bottom:8px}.card-title{font-size:17px;font-weight:800;color:var(--navy);margin-bottom:12px}.card p{margin:0;color:#374151;line-height:1.55;font-size:14px}ul{padding-left:18px;margin:10px 0 0;color:#374151;font-size:13px;line-height:1.65}
+.flow{display:grid;grid-template-columns:repeat(8,minmax(130px,1fr));gap:12px;overflow-x:auto;padding-bottom:6px}.step{min-height:132px;background:white;border-radius:22px;padding:16px;border:1px solid var(--line);box-shadow:0 12px 26px rgba(15,23,42,.08);position:relative}.step:not(:last-child):after{content:"→";position:absolute;right:-14px;top:44%;color:var(--blue);font-weight:800;font-size:22px;z-index:2}.num{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--blueSoft);color:var(--blue);font-size:12px;font-weight:800;margin-bottom:12px}.step-title{font-size:13px;line-height:1.25;color:var(--navy);font-weight:800;text-transform:uppercase}.desc{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.45;font-weight:600}
+.pill{display:inline-flex;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800;margin:4px 4px 0 0}.blue{background:var(--blueSoft);color:var(--blue)}.green{background:var(--greenSoft);color:var(--green)}.orange{background:var(--orangeSoft);color:var(--orange)}.red{background:var(--redSoft);color:var(--red)}
+.decision{border-radius:24px;padding:22px;min-height:220px;border:2px solid transparent}.decision.green{border-color:rgba(31,138,91,.3)}.decision.orange{border-color:rgba(245,158,11,.35)}.decision.red{border-color:rgba(194,65,12,.35)}.decision-label{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:8px}
+table{width:100%;border-collapse:collapse;border-radius:18px;overflow:hidden;background:white;box-shadow:var(--shadow)}th,td{padding:15px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:13px;line-height:1.4;vertical-align:top}th{background:var(--navy);color:white;font-size:12px;text-transform:uppercase;letter-spacing:.08em}tr:last-child td{border-bottom:none}.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase}.tag.a{background:var(--greenSoft);color:var(--green)}.tag.b{background:var(--blueSoft);color:var(--blue)}.tag.c{background:var(--orangeSoft);color:var(--orange)}.tag.d{background:var(--redSoft);color:var(--red)}
+.quote{background:var(--navy);color:white;border-radius:28px;padding:28px;font-size:22px;font-weight:800;line-height:1.25;box-shadow:var(--shadow)}.quote small{display:block;color:#BFD6FF;margin-top:14px;font-size:13px;line-height:1.5;font-weight:600}.footer{margin-top:30px;color:var(--muted);font-size:12px;font-weight:600;text-align:right}
+@media(max-width:1100px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.metrics,.g4,.g5{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}.section-head{flex-direction:column;align-items:flex-start}.note{text-align:left}}@media(max-width:700px){main{padding:14px}.hero{padding:24px}.metrics,.g2,.g4,.g5{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand-kicker">FTFS Platform</div>
+  <div class="brand-title">Global Quality Operating Model</div>
+  <div class="nav-section-title">Board</div>
+  <button class="nav-btn active" data-section="overview">01 · Overview</button>
+  <button class="nav-btn" data-section="mandate">02 · Mandate</button>
+  <button class="nav-btn" data-section="layers">03 · Quality Layers</button>
+  <button class="nav-btn" data-section="organization">04 · Organization</button>
+  <button class="nav-btn" data-section="matrix">05 · Product-Market Matrix</button>
+  <button class="nav-btn" data-section="release">06 · Lot Release</button>
+  <button class="nav-btn" data-section="kpis">07 · KPIs</button>
+  <button class="nav-btn" data-section="growers">08 · Grower Governance</button>
+  <button class="nav-btn" data-section="claims">09 · Claims & RCA</button>
+  <button class="nav-btn" data-section="commercial">10 · Commercial Link</button>
+  <button class="nav-btn" data-section="genetics">11 · Genetics Feedback</button>
+  <button class="nav-btn" data-section="governance">12 · Governance Rhythm</button>
+  <button class="nav-btn" data-section="authority">13 · Authority</button>
+</aside>
+<main>
+<section class="hero">
+  <div class="eyebrow">Operating model canvas</div>
+  <h1>One Standard. Multiple Origins. Consistent Fruit.</h1>
+  <p class="subtitle">A practical governance model for global fresh fruit companies operating across different origins, growers, packhouses, logistics chains, markets and customer programs.</p>
+  <div class="metrics">
+    <div class="metric"><strong>01</strong><span>Global Standard</span></div>
+    <div class="metric"><strong>03</strong><span>Quality Layers</span></div>
+    <div class="metric"><strong>08</strong><span>Control Points</span></div>
+    <div class="metric"><strong>360°</strong><span>Traceability</span></div>
+  </div>
+</section>
+<section id="overview" class="section active">
+  <div class="section-head"><h2>Global Quality Flow</h2><div class="note">From market expectation to operational execution, arrival feedback and system improvement.</div></div>
+  <div class="flow" id="flow"></div>
+</section>
+<section id="mandate" class="section">
+  <div class="section-head"><h2>Mandate of Global Quality</h2><div class="note">Quality must be a technical governance function, not only an inspection function.</div></div>
+  <div class="grid g2">
+    <div class="quote">Global Quality converts market expectations into measurable standards and governs their execution across origins, growers and packhouses.<small>Its purpose is to protect brand value, reduce variability and enable better commercial decisions.</small></div>
+    <div class="card"><div class="card-title">Core Responsibilities</div><span class="pill blue">Define standards</span><span class="pill green">Govern compliance</span><span class="pill orange">Anticipate risks</span><span class="pill red">Lead claims</span><ul><li>Protect the customer promise.</li><li>Reduce quality variability across origins.</li><li>Benchmark growers, packhouses and varieties.</li><li>Control product release and commercial restrictions.</li><li>Close the loop through root-cause analysis and corrective actions.</li></ul></div>
+  </div>
+</section>
+<section id="layers" class="section"><div class="section-head"><h2>Three Layers of Quality</h2><div class="note">The product result depends on process quality. Process quality depends on system quality.</div></div><div class="grid g3" id="layersGrid"></div></section>
+<section id="organization" class="section"><div class="section-head"><h2>Organization Model</h2><div class="note">Global governs. Origin executes. Grower and packhouse own compliance.</div></div><div class="grid g3" id="orgGrid"></div></section>
+<section id="matrix" class="section"><div class="section-head"><h2>Product–Origin–Market–Customer Matrix</h2><div class="note">Not every fruit should go to every market or customer.</div></div><div id="matrixTable"></div></section>
+<section id="release" class="section"><div class="section-head"><h2>Lot Release & Commercial Allocation</h2><div class="note">Technical release must define what Commercial can safely sell and where.</div></div><div class="grid g3" id="releaseGrid"></div></section>
+<section id="kpis" class="section"><div class="section-head"><h2>Global Quality Dashboard</h2><div class="note">A single global dashboard should connect field, packing, logistics, arrival and management indicators.</div></div><div class="grid g5" id="kpiGrid"></div></section>
+<section id="growers" class="section"><div class="section-head"><h2>Grower Governance</h2><div class="note">Trust should be earned through performance, not assumed by volume.</div></div><div id="growerTable"></div></section>
+<section id="claims" class="section"><div class="section-head"><h2>Claims Management & Root Cause Analysis</h2><div class="note">A claim closed only with a credit note is a lost learning opportunity.</div></div><div class="grid g2"><div class="card"><div class="card-title">RCA Flow</div><ul><li>Claim received</li><li>Lot identified</li><li>Evidence collected</li><li>Root cause analysis</li><li>Corrective action defined</li><li>Responsible owner assigned</li><li>Follow-up completed</li><li>Standard / protocol updated</li></ul></div><div class="card"><div class="card-title">Root Cause Buckets</div><span class="pill blue">Field</span><span class="pill green">Harvest</span><span class="pill orange">Packing</span><span class="pill red">Cooling</span><span class="pill blue">Logistics</span><span class="pill green">Commercial</span><span class="pill orange">Customer</span><ul><li>Each claim must end in a learning, an owner and a system-level correction.</li><li>The goal is not only to assign responsibility. It is to reduce recurrence.</li></ul></div></div></section>
+<section id="commercial" class="section"><div class="section-head"><h2>Quality as a Commercial Value Enabler</h2><div class="note">Quality does not replace Commercial. It defines the technical boundaries to maximize value safely.</div></div><div class="grid g2" id="commercialGrid"></div></section>
+<section id="genetics" class="section"><div class="section-head"><h2>Feedback to Genetics & Variety Strategy</h2><div class="note">The best varieties are not only productive. They must travel well, arrive well and sell well.</div></div><div class="grid g4" id="geneticsGrid"></div></section>
+<section id="governance" class="section"><div class="section-head"><h2>Governance Rhythm</h2><div class="note">Quality governance requires rhythm, escalation and decision rights.</div></div><div class="grid g2" id="governanceGrid"></div></section>
+<section id="authority" class="section"><div class="section-head"><h2>Required Authority</h2><div class="note">Without authority, Global Quality becomes advisory. With authority and data, it becomes a value-protection system.</div></div><div class="grid g4" id="authorityGrid"></div><div class="footer">FTFS · Global Quality Operating Model · Draft for internal discussion</div></section>
+</main>
+</div>
+<script>
+const flow=[
+["Market / Customer Expectation","Programs, specifications, brand promise and customer tolerance."],
+["Global Quality Standard","Measurable standard by product, variety, market and customer."],
+["Origin Execution Model","Local adaptation without diluting global expectations."],
+["Grower / Packhouse Compliance","Protocols, controls, audits, traceability and accountability."],
+["Lot Release & Allocation","Technical release and market/customer restrictions."],
+["Cold Chain Control","Cooling, transit, container integrity and risk alerts."],
+["Arrival Performance","Objective condition at destination and customer acceptance."],
+["Feedback & Improvement","Root-cause analysis, corrective actions and protocol updates."]
+];
+const layers=[
+["Layer 1","Product Quality","What the customer sees and receives.",["Size, color and appearance","Firmness and flavor","Bloom / external condition","Defects and decay","Shelf life and arrival condition"]],
+["Layer 2","Process Quality","What determines whether the fruit will arrive well.",["Harvest timing","Field handling","Time to cooling","Packing and selection","Cold chain and transit"]],
+["Layer 3","System Quality","What allows the company to repeat the result.",["Protocols and audits","Training and scorecards","Traceability and data","Claims process","Continuous improvement"]]
+];
+const org=[
+["Level 1","Global Quality",["Owns global standards","Approves protocols","Defines KPIs","Audits origins","Leads major claims","Benchmarks performance"]],
+["Level 2","Origin Quality",["Implements standards","Audits growers and packhouses","Controls product release","Reports data","Executes corrective actions","Trains local teams"]],
+["Level 3","Grower / Packhouse Quality",["Owns internal QC","Applies protocols","Registers data","Enables traceability","Responds to deviations","Executes improvement plans"]]
+];
+const matrix=[
+["Product","Required standard and shelf-life logic","Base specification and minimum condition."],
+["Variety","Postharvest behavior and risk profile","Market fit, transit tolerance and arrival risk."],
+["Origin","Climate, logistics and operating constraints","Origin-specific controls without lowering the standard."],
+["Grower","Reliability and historical performance","Trust level, supervision intensity and market access."],
+["Packhouse","Process capability and selection accuracy","Release confidence and defect control."],
+["Market","Transit time, regulations and expectations","Destination restrictions and shelf-life requirements."],
+["Customer","Tolerance, program rules and claim sensitivity","Specific allocation rules and risk controls."],
+["Format","Packaging, presentation and handling risk","Condition and shelf-life exposure."]
+];
+const release=[
+["Released","green","Meets the standard and is suitable for the intended market and customer program.",["No material restriction","Program-ready","Normal monitoring"]],
+["Restricted","orange","Commercially usable, but limited to lower-risk channels, shorter transit or specific customers.",["Market restriction","Customer restriction","Enhanced monitoring"]],
+["Blocked / Reclassified","red","Does not meet minimum requirements. Must be rejected, reworked, diverted or downgraded.",["Hold shipment","Rework or downgrade","Corrective action required"]]
+];
+const kpis=[
+["Field KPIs",["Harvest readiness","Size distribution","Firmness","Defect incidence","Maturity / color"]],
+["Packhouse KPIs",["Exportable %","Packout %","Defects by type","Rejections","Blocked lots"]],
+["Postharvest KPIs",["Harvest-to-cooling time","Pulp temperature","Time to target temp.","Cold chain deviations","Transit days"]],
+["Arrival KPIs",["Arrival score","Firmness","Decay","Dehydration","Customer acceptance"]],
+["Management KPIs",["Claims per kg","Claims cost","Grower score","Origin score","Corrective action closure %"]]
+];
+const growers=[
+["A","Consistent, low claims, strong internal controls.","Standard monitoring and greater operational autonomy."],
+["B","Generally compliant, with some variability.","Normal supervision and periodic review."],
+["C","Recurrent deviations or weak control discipline.","Intensive audits and formal corrective action plan."],
+["D","Critical non-compliance or repeated failure.","Suspension, blocking, exit plan or restricted participation."]
+];
+const commercial=[
+["Quality Provides",["Market restrictions","Customer suitability","Variety performance","Risk alerts","Grower reliability","Arrival feedback","Shelf-life intelligence"]],
+["Commercial Decides",["Customer allocation","Program commitments","Pricing strategy","Market destination","Volume planning","Customer relationship","Final commercial execution"]]
+];
+const genetics=[
+["Postharvest","Firmness, decay, dehydration, bloom retention and shelf-life behavior."],
+["Market Fit","Which varieties work best by customer, market and transit time."],
+["Origin Fit","How the same variety behaves under different climates and operations."],
+["Renewal Logic","Data-driven support for planting, renewal and varietal replacement decisions."]
+];
+const governance=[
+["Monthly in season / quarterly off season","Global Quality Committee",["Origin performance","Claims and arrival scores","Critical growers","Customer issues","Protocol updates","Corrective actions"]],
+["Weekly during active shipping","Weekly Season Review",["Fruit shipped","Fruit in transit","Quality alerts","Market restrictions","Grower deviations","Block / release decisions"]]
+];
+const authority=[
+["Approve","Standards, protocols, specifications and audit criteria."],
+["Audit","Origins, growers, packhouses, cold chain and destination performance."],
+["Block","Lots, markets, customers or growers when risk exceeds tolerance."],
+["Escalate","Critical non-compliance directly to senior management."]
+];
+
+const ul=a=>"<ul>"+a.map(x=>`<li>${x}</li>`).join("")+"</ul>";
+flow.forEach((s,i)=>flowEl=document.getElementById("flow").insertAdjacentHTML("beforeend",`<div class="step"><div class="num">${i+1}</div><div class="step-title">${s[0]}</div><div class="desc">${s[1]}</div></div>`));
+layers.forEach(x=>document.getElementById("layersGrid").insertAdjacentHTML("beforeend",`<div class="card"><div class="kicker">${x[0]}</div><div class="card-title">${x[1]}</div><p>${x[2]}</p>${ul(x[3])}</div>`));
+org.forEach(x=>document.getElementById("orgGrid").insertAdjacentHTML("beforeend",`<div class="card"><div class="kicker">${x[0]}</div><div class="card-title">${x[1]}</div>${ul(x[2])}</div>`));
+document.getElementById("matrixTable").innerHTML=`<table><thead><tr><th>Dimension</th><th>What it defines</th><th>Quality implication</th></tr></thead><tbody>${matrix.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table>`;
+release.forEach(x=>document.getElementById("releaseGrid").insertAdjacentHTML("beforeend",`<div class="decision ${x[1]}"><div class="decision-label">${x[0]}</div><p>${x[2]}</p>${ul(x[3])}</div>`));
+kpis.forEach(x=>document.getElementById("kpiGrid").insertAdjacentHTML("beforeend",`<div class="card small"><div class="card-title">${x[0]}</div>${ul(x[1])}</div>`));
+document.getElementById("growerTable").innerHTML=`<table><thead><tr><th>Category</th><th>Profile</th><th>Governance consequence</th></tr></thead><tbody>${growers.map(r=>`<tr><td><span class="tag ${r[0].toLowerCase()}">${r[0]}</span></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table>`;
+commercial.forEach(x=>document.getElementById("commercialGrid").insertAdjacentHTML("beforeend",`<div class="card"><div class="card-title">${x[0]}</div>${ul(x[1])}</div>`));
+genetics.forEach(x=>document.getElementById("geneticsGrid").insertAdjacentHTML("beforeend",`<div class="card small"><div class="card-title">${x[0]}</div><p>${x[1]}</p></div>`));
+governance.forEach(x=>document.getElementById("governanceGrid").insertAdjacentHTML("beforeend",`<div class="card"><div class="kicker">${x[0]}</div><div class="card-title">${x[1]}</div>${ul(x[2])}</div>`));
+authority.forEach(x=>document.getElementById("authorityGrid").insertAdjacentHTML("beforeend",`<div class="card small"><div class="card-title">${x[0]}</div><p>${x[1]}</p></div>`));
+document.querySelectorAll(".nav-btn").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));button.classList.add("active");document.getElementById(button.dataset.section).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}));
+</script>
+</body>
+</html>
