@@ -1464,7 +1464,7 @@
       "Destination Handling": "Manejo en Destino",
       "Customer-Specific Issue": "Tema Específico de Cliente",
       "Claims must be treated as system feedback, not isolated commercial incidents.": "Los reclamos deben tratarse como feedback del sistema, no como incidentes comerciales aislados.",
-      "The purpose of RCA is not only to assign blame. It is to prevent recurrence.": "El propósito del RCA no es solo asignar culpa. Es prevenir recurrencia.",
+      "The purpose of RCA is not only to assign blame. It is to prevent recurrence.": "El propósito del RCA no es solo asignar responsabilidad. Es prevenir recurrencia.",
       "Quality as a Commercial Value Enabler": "Calidad como Habilitador de Valor Comercial",
       "Quality does not replace Commercial. It defines the technical boundaries and risk profile that allow Commercial to maximize value safely.": "Calidad no reemplaza a Comercial. Define los límites técnicos y el perfil de riesgo que permiten a Comercial maximizar valor de forma segura.",
       "Quality Provides": "Calidad Provee",
@@ -1563,7 +1563,9 @@
       "Full traceability": "Trazabilidad completa",
       "Field-to-arrival visibility for performance, claims and corrective action.": "Visibilidad campo-arribo para performance, reclamos y acciones correctivas.",
       "Claims, RCA, scorecards, early warnings and governance rhythm drive system learning.": "Reclamos, RCA, scorecards, alertas tempranas y ritmo de gobernanza impulsan el aprendizaje del sistema.",
-      "FTFS Peru · Quality Governance Model · Draft for internal discussion": "FTFS Perú · Modelo de Gobernanza de Calidad · Borrador para discusión interna"
+      "FTFS Peru · Quality Governance Model · Draft for internal discussion": "FTFS Perú · Modelo de Gobernanza de Calidad · Borrador para discusión interna",
+      "Claims Management & Root Cause Analysis": "Gestión de Reclamos y Análisis de Causa Raíz",
+      "A claim closed only with a credit note is a lost learning opportunity. Every claim must lead to root-cause analysis, accountability and corrective action.": "Un reclamo cerrado solo con una nota de crédito es una oportunidad de aprendizaje perdida. Todo reclamo debe conducir a análisis de causa raíz, responsabilidad y acción correctiva."
 };
 
     function translateNodeText(text, lang) {
@@ -1598,6 +1600,43 @@
         const translated = translateNodeText(trimmed, lang);
         node.nodeValue = originalWhitespacePrefix + translated + originalWhitespaceSuffix;
       });
+
+
+      const point9Map = {
+        "Claims Management & Root Cause Analysis": "Gestión de Reclamos y Análisis de Causa Raíz",
+        "A claim closed only with a credit note is a lost learning opportunity. Every claim must lead to root-cause analysis, accountability and corrective action.": "Un reclamo cerrado solo con una nota de crédito es una oportunidad de aprendizaje perdida. Todo reclamo debe conducir a análisis de causa raíz, responsabilidad y acción correctiva.",
+        "RCA Flow": "Flujo RCA",
+        "Claim received": "Reclamo recibido",
+        "Lot identified": "Lote identificado",
+        "Evidence collected": "Evidencia recopilada",
+        "Origin records reviewed": "Registros de origen revisados",
+        "Destination confirmation reviewed": "Confirmación de destino revisada",
+        "Root cause classified": "Causa raíz clasificada",
+        "Responsibility assigned": "Responsabilidad asignada",
+        "Corrective action defined": "Acción correctiva definida",
+        "Follow-up completed": "Seguimiento completado",
+        "Standard / protocol updated if needed": "Estándar / protocolo actualizado si corresponde",
+        "Root Cause Buckets": "Categorías de Causa Raíz",
+        "Field / Pre-harvest": "Campo / Pre-cosecha",
+        "Harvest & Handling": "Cosecha y Manejo",
+        "Packing & Selection": "Packing y Selección",
+        "Commercial Compliance": "Cumplimiento Comercial",
+        "Weight Management": "Gestión de Peso",
+        "Cooling / Cold Chain": "Enfriamiento / Cadena de Frío",
+        "Logistics / Transit": "Logística / Tránsito",
+        "Market Allocation": "Asignación de Mercado",
+        "Destination Handling": "Manejo en Destino",
+        "Customer-Specific Issue": "Tema Específico de Cliente",
+        "Claims must be treated as system feedback, not isolated commercial incidents.": "Los reclamos deben tratarse como feedback del sistema, no como incidentes comerciales aislados.",
+        "The purpose of RCA is not only to assign blame. It is to prevent recurrence.": "El propósito del RCA no es solo asignar responsabilidad. Es prevenir recurrencia."
+      };
+
+      if (lang === "es") {
+        document.querySelectorAll("#claims h2, #claims .section-note, #claims .card-title, #claims li, #claims .pill").forEach(el => {
+          const txt = el.textContent.trim();
+          if (point9Map[txt]) el.textContent = point9Map[txt];
+        });
+      }
 
       localStorage.setItem("ftfsLang", lang);
     }
