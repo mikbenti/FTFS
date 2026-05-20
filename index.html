@@ -9,26 +9,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --navy: #102A43;
-      --blue: #1F6FEB;
-      --blue-soft: #E8F1FF;
-      --green: #1F8A5B;
-      --green-soft: #E8F7EF;
-      --orange: #F59E0B;
-      --orange-soft: #FFF4DA;
-      --red: #C2410C;
-      --red-soft: #FFEDE5;
-      --purple: #6D28D9;
-      --purple-soft: #F1E9FF;
-      --gray-900: #1F2937;
-      --gray-700: #374151;
-      --gray-500: #6B7280;
-      --gray-300: #D1D5DB;
-      --gray-200: #E5E7EB;
-      --gray-100: #F3F4F6;
+      --black: #0B0B0D;
+      --charcoal: #1A1A1D;
+      --dark-gray: #2F3033;
+      --mid-gray: #666A70;
+      --gray-900: #111113;
+      --gray-700: #34363A;
+      --gray-500: #71757D;
+      --gray-300: #D9DDE3;
+      --gray-200: #E9ECEF;
+      --gray-100: #F6F7F8;
+      --gray-050: #FAFAFB;
       --white: #FFFFFF;
-      --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
-      --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
+      --ftfs-red: #D4081D;
+      --ftfs-red-dark: #990614;
+      --ftfs-red-soft: #FBE8EA;
+      --navy: #0B0B0D;
+      --blue: #D4081D;
+      --blue-soft: #FBE8EA;
+      --green: #2F3033;
+      --green-soft: #F2F3F4;
+      --orange: #71757D;
+      --orange-soft: #F6F7F8;
+      --red: #D4081D;
+      --red-soft: #FBE8EA;
+      --purple: #0B0B0D;
+      --purple-soft: #F1F2F3;
+      --shadow: 0 18px 45px rgba(11, 11, 13, 0.12);
+      --shadow-soft: 0 10px 25px rgba(11, 11, 13, 0.08);
       --radius: 24px;
     }
 
@@ -37,7 +45,7 @@
     body {
       margin: 0;
       font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FF 100%);
+      background: linear-gradient(135deg, #FAFAFB 0%, #F1F2F3 100%);
       color: var(--gray-900);
     }
 
@@ -48,7 +56,7 @@
     }
 
     aside {
-      background: var(--navy);
+      background: var(--black);
       color: white;
       padding: 28px 22px;
       position: sticky;
@@ -59,11 +67,30 @@
 
     .brand { margin-bottom: 30px; }
 
+    .logo-panel {
+      background: var(--ftfs-red);
+      border-radius: 6px;
+      padding: 17px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .logo-panel img {
+      max-width: 190px;
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
     .brand-kicker {
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #9CC3FF;
+      color: rgba(255,255,255,0.72);
       font-weight: 700;
       margin-bottom: 8px;
     }
@@ -76,7 +103,7 @@
 
     .brand-subtitle {
       margin-top: 10px;
-      color: #BFD6FF;
+      color: rgba(255,255,255,0.68);
       font-size: 12px;
       line-height: 1.45;
       font-weight: 500;
@@ -86,7 +113,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #A7B4C7;
+      color: rgba(255,255,255,0.50);
       font-weight: 700;
       margin: 26px 0 12px;
     }
@@ -99,7 +126,7 @@
       border: 0;
       border-radius: 14px;
       padding: 11px 12px;
-      color: #DCE7F7;
+      color: rgba(255,255,255,0.78);
       background: transparent;
       font-family: inherit;
       font-size: 12.5px;
@@ -114,6 +141,7 @@
       background: rgba(255,255,255,0.12);
       color: white;
       transform: translateX(2px);
+      box-shadow: inset 4px 0 0 var(--ftfs-red);
     }
 
     main {
@@ -123,12 +151,13 @@
 
     .hero {
       background: var(--white);
-      border-radius: 34px;
+      border-radius: 22px;
       padding: 34px;
       box-shadow: var(--shadow);
       margin-bottom: 26px;
       position: relative;
       overflow: hidden;
+      border-top: 7px solid var(--ftfs-red);
     }
 
     .hero::after {
@@ -139,7 +168,7 @@
       right: -140px;
       top: -160px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(31,111,235,0.25), rgba(31,111,235,0));
+      background: radial-gradient(circle, rgba(212,8,29,0.18), rgba(212,8,29,0));
     }
 
     .hero-content {
@@ -181,10 +210,11 @@
     }
 
     .metric-card {
-      border-radius: 22px;
+      border-radius: 14px;
       background: var(--gray-100);
       padding: 18px;
       border: 1px solid var(--gray-200);
+      border-left: 5px solid var(--ftfs-red);
     }
 
     .metric-value {
@@ -250,10 +280,23 @@
 
     .card {
       background: var(--white);
-      border-radius: var(--radius);
+      border-radius: 18px;
       padding: 24px;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      border: 1px solid var(--gray-200);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--ftfs-red), var(--charcoal));
+      opacity: 0.9;
     }
 
     .card.compact { padding: 18px; }
@@ -300,9 +343,10 @@
     .flow-step {
       min-height: 142px;
       background: white;
-      border-radius: 22px;
+      border-radius: 14px;
       padding: 16px;
       border: 1px solid var(--gray-200);
+      border-top: 4px solid var(--ftfs-red);
       box-shadow: var(--shadow-soft);
       position: relative;
     }
@@ -324,8 +368,8 @@
       display: grid;
       place-items: center;
       border-radius: 50%;
-      background: var(--blue-soft);
-      color: var(--blue);
+      background: var(--ftfs-red);
+      color: var(--white);
       font-size: 12px;
       font-weight: 800;
       margin-bottom: 12px;
@@ -365,7 +409,7 @@
     .pill.purple { background: var(--purple-soft); color: var(--purple); }
 
     .decision-card {
-      border-radius: 24px;
+      border-radius: 16px;
       padding: 22px;
       min-height: 245px;
       border: 2px solid transparent;
@@ -386,7 +430,7 @@
       width: 100%;
       border-collapse: collapse;
       overflow: hidden;
-      border-radius: 18px;
+      border-radius: 14px;
       background: white;
       box-shadow: var(--shadow);
     }
@@ -401,7 +445,7 @@
     }
 
     th {
-      background: var(--navy);
+      background: var(--black);
       color: white;
       font-size: 12px;
       text-transform: uppercase;
@@ -426,19 +470,20 @@
     .tag.d { background: var(--red-soft); color: var(--red); }
 
     .quote {
-      background: var(--navy);
+      background: var(--black);
       color: white;
-      border-radius: 28px;
+      border-radius: 20px;
       padding: 28px;
       font-size: 22px;
       font-weight: 800;
       line-height: 1.25;
       box-shadow: var(--shadow);
+      border-left: 8px solid var(--ftfs-red);
     }
 
     .quote small {
       display: block;
-      color: #BFD6FF;
+      color: rgba(255,255,255,0.68);
       margin-top: 14px;
       font-size: 13px;
       line-height: 1.5;
@@ -448,7 +493,7 @@
     .callout {
       margin-top: 18px;
       background: white;
-      border-left: 6px solid var(--blue);
+      border-left: 6px solid var(--ftfs-red);
       border-radius: 20px;
       padding: 20px 22px;
       box-shadow: var(--shadow-soft);
@@ -496,6 +541,9 @@
   <div class="app">
     <aside>
       <div class="brand">
+        <div class="logo-panel">
+          <img src="logo ftfs.png" alt="FTFS logo" />
+        </div>
         <div class="brand-kicker">FTFS Peru Platform</div>
         <div class="brand-title">Quality Governance Model</div>
         <div class="brand-subtitle">Peru application, scalable to other origins with local adaptation.</div>
@@ -521,7 +569,12 @@
     <main>
       <section class="hero">
         <div class="hero-content">
-          <div class="eyebrow">Operating model canvas</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px;flex-wrap:wrap;">
+            <div class="eyebrow" style="margin-bottom:0;">Operating model canvas</div>
+            <div style="background:var(--ftfs-red);border-radius:6px;padding:11px 16px;display:flex;align-items:center;justify-content:center;min-width:150px;box-shadow:0 10px 22px rgba(11,11,13,.18);">
+              <img src="logo ftfs.png" alt="FTFS logo" style="max-width:130px;height:auto;display:block;" />
+            </div>
+          </div>
           <h1>One Standard. Multiple Growers. Consistent Arrivals.</h1>
           <p class="subtitle">
             A governance model for FTFS Peru to manage fruit from different growers, fields and packhouses under one technical standard, with clear release criteria, traceability, arrival feedback and continuous improvement. The model is designed for Peru and can be scaled to other origins, adapted to each origin’s operational reality.
