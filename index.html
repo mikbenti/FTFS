@@ -585,6 +585,56 @@
     }
     }
 
+
+    .lang-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      background: var(--black);
+      border: 2px solid var(--ftfs-red);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 18px 38px rgba(11, 11, 13, 0.32);
+    }
+
+    .lang-toggle button {
+      border: 0;
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 15px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .lang-toggle button.active {
+      background: var(--ftfs-red);
+      color: var(--white);
+    }
+
+    .lang-toggle button:not(.active):hover {
+      background: var(--charcoal);
+    }
+
+    @media (max-width: 760px) {
+      .lang-toggle {
+        top: 12px;
+        right: 12px;
+      }
+
+      .lang-toggle button {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+    }
+
+
     @media (max-width: 1180px) {
       .app { grid-template-columns: 1fr; }
       aside {
@@ -607,6 +657,12 @@
 </head>
 
 <body>
+
+  <div class="lang-toggle" aria-label="Language selector">
+    <button id="langBtnEn" type="button" class="active">EN</button>
+    <button id="langBtnEs" type="button">ES</button>
+  </div>
+
 <div class="app">
     <aside>
       <div class="brand">
@@ -1109,6 +1165,448 @@
   </div>
 
   <script>
+
+
+
+    const translationsES = {
+      "FTFS Peru Platform": "Plataforma FTFS Perú",
+      "Quality Governance Model": "Modelo de Gobernanza de Calidad",
+      "Peru application, scalable to other origins with local adaptation.": "Aplicación Perú, escalable a otros orígenes con adaptación local.",
+      "Model Sections": "Secciones del Modelo",
+      "01 · Overview": "01 · Resumen",
+      "02 · Mandate": "02 · Mandato",
+      "03 · Quality Layers": "03 · Capas de Calidad",
+      "04 · Organization": "04 · Organización",
+      "05 · Allocation Matrix": "05 · Matriz de Asignación",
+      "06 · Lot Release": "06 · Liberación de Lotes",
+      "07 · Governance KPIs": "07 · KPIs de Gobernanza",
+      "08 · Grower Governance": "08 · Gobernanza de Productores",
+      "09 · Claims & RCA": "09 · Reclamos y RCA",
+      "10 · Commercial Link": "10 · Vínculo Comercial",
+      "11 · Program Strategy": "11 · Estrategia del Programa",
+      "12 · Governance Rhythm": "12 · Ritmo de Gobernanza",
+      "13 · Required Authority": "13 · Autoridad Requerida",
+      "14 · Executive Summary": "14 · Resumen Ejecutivo",
+      "Operating model canvas": "Canvas de modelo operativo",
+      "One Standard. Multiple Growers. Consistent Arrivals.": "Un Estándar. Múltiples Productores. Arribos Consistentes.",
+      "A governance model for FTFS Peru to manage fruit from different growers, fields and packhouses under one technical standard, with clear release criteria, traceability, early warning signals, timely escalation, arrival feedback and continuous improvement. The model is designed for Peru and can be scaled to other origins, adapted to each origin’s operational reality.": "Un modelo de gobernanza para que FTFS Perú gestione fruta de distintos productores, campos y packhouses bajo un único estándar técnico, con criterios claros de liberación, trazabilidad, alertas tempranas, escalamiento oportuno, feedback de arribo y mejora continua. El modelo está diseñado para Perú y puede escalarse a otros orígenes, adaptado a la realidad operativa de cada origen.",
+      "Technical Standard": "Estándar Técnico",
+      "Quality Layers": "Capas de Calidad",
+      "Critical Control Points": "Puntos Críticos de Control",
+      "Field-to-Arrival Traceability": "Trazabilidad Campo–Arribo",
+      "FTFS Quality Governance Flow": "Flujo de Gobernanza de Calidad FTFS",
+      "From FTF market expectations to operational execution, early warnings, commercial compliance, arrival feedback and system improvement.": "Desde las expectativas de mercado de FTF hasta la ejecución operativa, alertas tempranas, cumplimiento comercial, feedback de arribo y mejora del sistema.",
+      "FTF Market & Customer Expectations": "Expectativas de Mercado y Cliente de FTF",
+      "Programs, customer requirements, commercial promise and risk tolerance.": "Programas, requisitos de clientes, promesa comercial y tolerancia al riesgo.",
+      "FTFS Technical Standard": "Estándar Técnico FTFS",
+      "Measurable standard by product, variety, grower, format, market and customer.": "Estándar medible por producto, variedad, productor, formato, mercado y cliente.",
+      "Grower & Packhouse Execution": "Ejecución de Productor y Packhouse",
+      "Protocols, audits, controls, training, traceability and compliance.": "Protocolos, auditorías, controles, capacitación, trazabilidad y cumplimiento.",
+      "Commercial Compliance at Origin": "Cumplimiento Comercial en Origen",
+      "Packaging, label, pack configuration, customer code, traceability and weight integrity.": "Empaque, etiqueta, confección, código de cliente, trazabilidad e integridad de peso.",
+      "Lot Release & Allocation": "Liberación y Asignación de Lotes",
+      "Release, restrict, block or alert early based on condition, compliance, weight, logistics risk and customer fit.": "Liberar, restringir, bloquear o alertar oportunamente según condición, cumplimiento, peso, riesgo logístico y calce con el cliente.",
+      "Cold Chain & Logistics": "Cadena de Frío y Logística",
+      "Cooling discipline, pulp temperature, container performance, transit risk and timely alerts to destination.": "Disciplina de enfriamiento, temperatura de pulpa, desempeño del contenedor, riesgo de tránsito y alertas oportunas a destino.",
+      "Arrival Confirmation": "Confirmación de Arribo",
+      "Destination confirms condition, packaging, labeling, weight and customer acceptance.": "Destino confirma condición, empaque, etiquetado, peso y aceptación del cliente.",
+      "RCA & Improvement": "RCA y Mejora",
+      "Claims, root-cause analysis, corrective actions, scorecards and protocol updates.": "Reclamos, análisis de causa raíz, acciones correctivas, scorecards y actualización de protocolos.",
+      "Mandate of FTFS Quality Governance": "Mandato de la Gobernanza de Calidad FTFS",
+      "Quality governance must convert expectations into standards, standards into controls, and controls into reliable arrivals.": "La gobernanza de calidad debe convertir expectativas en estándares, estándares en controles y controles en arribos confiables.",
+      "FTFS Quality Governance converts FTF market expectations and customer requirements into measurable technical standards, and governs their execution across growers, fields, packhouses and logistics within the Peru platform.": "La Gobernanza de Calidad FTFS convierte las expectativas de mercado de FTF y los requisitos de clientes en estándares técnicos medibles, y gobierna su ejecución a través de productores, campos, packhouses y logística dentro de la plataforma Perú.",
+      "Its purpose is to protect program value, reduce variability, ensure reliable arrivals, anticipate risks and enable better commercial allocation decisions.": "Su propósito es proteger el valor del programa, reducir variabilidad, asegurar arribos confiables, anticipar riesgos y habilitar mejores decisiones de asignación comercial.",
+      "Core Responsibilities": "Responsabilidades Principales",
+      "Define technical standards": "Definir estándares técnicos",
+      "Govern grower compliance": "Gobernar cumplimiento de productores",
+      "Anticipate quality risks": "Anticipar riesgos de calidad",
+      "Trigger timely alerts": "Activar alertas oportunas",
+      "Lead claims and RCA": "Liderar reclamos y RCA",
+      "Protect the FTF / MBO program promise.": "Proteger la promesa del programa FTF / MBO.",
+      "Reduce quality variability across growers, fields and packhouses.": "Reducir la variabilidad de calidad entre productores, campos y packhouses.",
+      "Benchmark growers, packhouses, varieties and production units.": "Comparar productores, packhouses, variedades y unidades productivas.",
+      "Control product release and commercial restrictions.": "Controlar la liberación de producto y restricciones comerciales.",
+      "Provide early warnings to maximize flexibility for destination strategy adjustments.": "Entregar alertas tempranas para maximizar la flexibilidad de ajuste de estrategias en destino.",
+      "Close the loop through root-cause analysis and corrective actions.": "Cerrar el ciclo mediante análisis de causa raíz y acciones correctivas.",
+      "Three Layers of FTFS Quality Governance": "Tres Capas de Gobernanza de Calidad FTFS",
+      "This separates fruit quality from process discipline and governance capability.": "Esto separa la calidad de fruta de la disciplina de proceso y de la capacidad de gobernanza.",
+      "Layer 1": "Capa 1",
+      "Layer 2": "Capa 2",
+      "Layer 3": "Capa 3",
+      "Product Quality": "Calidad de Producto",
+      "The physical, commercial and arrival condition of the fruit delivered to the customer.": "La condición física, comercial y de arribo de la fruta entregada al cliente.",
+      "Size / caliber": "Tamaño / calibre",
+      "Color and appearance": "Color y apariencia",
+      "Firmness": "Firmeza",
+      "Flavor": "Sabor",
+      "Bloom / external condition": "Bloom / condición externa",
+      "Defects and decay": "Defectos y pudrición",
+      "Shelf life and arrival condition": "Vida útil y condición de arribo",
+      "Compliance with FTF customer specifications": "Cumplimiento de especificaciones de clientes FTF",
+      "Process Quality": "Calidad de Proceso",
+      "The operational discipline required to ensure that fruit maintains condition and commercial compliance from field to destination.": "La disciplina operativa necesaria para asegurar que la fruta mantenga condición y cumplimiento comercial desde campo hasta destino.",
+      "Harvest timing": "Momento de cosecha",
+      "Field handling": "Manejo en campo",
+      "Time from harvest to cooling": "Tiempo desde cosecha hasta enfriamiento",
+      "Pulp temperature management": "Gestión de temperatura de pulpa",
+      "Packing and selection accuracy": "Precisión de packing y selección",
+      "Lot segregation": "Segregación de lotes",
+      "Packaging and pack configuration compliance": "Cumplimiento de empaque y confección",
+      "Labeling and traceability compliance": "Cumplimiento de etiquetado y trazabilidad",
+      "Net weight and overweight control": "Control de peso neto y sobrepeso",
+      "Cold chain integrity": "Integridad de cadena de frío",
+      "Transit condition": "Condición en tránsito",
+      "Early warning and timely escalation discipline": "Disciplina de alerta temprana y escalamiento oportuno",
+      "Quality Governance System": "Sistema de Gobernanza de Calidad",
+      "The governance system that allows FTFS to control, compare, correct and continuously improve quality performance across growers, fields and packhouses.": "El sistema de gobernanza que permite a FTFS controlar, comparar, corregir y mejorar continuamente la performance de calidad entre productores, campos y packhouses.",
+      "Common technical standards": "Estándares técnicos comunes",
+      "Grower and packhouse audits": "Auditorías a productores y packhouses",
+      "Traceability": "Trazabilidad",
+      "Quality data platform": "Plataforma de datos de calidad",
+      "Grower scorecards": "Scorecards de productores",
+      "Claims management": "Gestión de reclamos",
+      "Root-cause analysis": "Análisis de causa raíz",
+      "Corrective action plans": "Planes de acción correctiva",
+      "Training and calibration": "Capacitación y calibración",
+      "Continuous improvement": "Mejora continua",
+      "Organization Model": "Modelo Organizacional",
+      "FTFS sets and governs the quality standard. Field, packing and logistics teams execute the controls. Growers and packhouses remain accountable for compliance.": "FTFS define y gobierna el estándar de calidad. Los equipos de campo, packing y logística ejecutan los controles. Productores y packhouses mantienen la responsabilidad por el cumplimiento.",
+      "Level 1": "Nivel 1",
+      "Level 2": "Nivel 2",
+      "Level 3": "Nivel 3",
+      "FTFS Quality Governance": "Gobernanza de Calidad FTFS",
+      "Owns FTFS quality standards": "Es dueño de los estándares de calidad FTFS",
+      "Defines release criteria": "Define criterios de liberación",
+      "Approves protocols and specifications": "Aprueba protocolos y especificaciones",
+      "Sets grower and packhouse scorecards": "Define scorecards de productores y packhouses",
+      "Leads critical claims and RCA": "Lidera reclamos críticos y RCA",
+      "Reports quality performance to management": "Reporta performance de calidad a gerencia",
+      "Operational Quality Execution": "Ejecución Operativa de Calidad",
+      "Implements FTFS standards in the field and packhouse": "Implementa estándares FTFS en campo y packhouse",
+      "Audits growers, fields and packhouses": "Audita productores, campos y packhouses",
+      "Controls harvest, packing and pre-shipment checks": "Controla cosecha, packing y chequeos pre-embarque",
+      "Monitors cold chain and logistics conditions": "Monitorea cadena de frío y condiciones logísticas",
+      "Reports deviations, quality alerts and destination-relevant risks on time": "Reporta oportunamente desviaciones, alertas de calidad y riesgos relevantes para destino",
+      "Executes corrective action follow-up": "Da seguimiento a acciones correctivas",
+      "Grower / Packhouse Compliance": "Cumplimiento de Productor / Packhouse",
+      "Owns internal quality control": "Es responsable del control interno de calidad",
+      "Complies with FTFS technical standards": "Cumple los estándares técnicos FTFS",
+      "Maintains lot identity and traceability": "Mantiene identidad de lote y trazabilidad",
+      "Applies harvest and handling protocols": "Aplica protocolos de cosecha y manejo",
+      "Provides required quality data": "Entrega los datos de calidad requeridos",
+      "Executes corrective action plans": "Ejecuta planes de acción correctiva",
+      "Operating principle:": "Principio operativo:",
+      "FTFS does not replace grower responsibility. It governs the system, defines the standard, verifies compliance and protects the program.": "FTFS no reemplaza la responsabilidad del productor. Gobierna el sistema, define el estándar, verifica cumplimiento y protege el programa.",
+      "Quality Allocation Matrix": "Matriz de Asignación de Calidad",
+      "Fruit should not be allocated only by availability or volume. Allocation must reflect product condition, grower reliability, packhouse performance, logistics risk, commercial compliance, market requirements and customer tolerance.": "La fruta no debe asignarse solo por disponibilidad o volumen. La asignación debe reflejar condición de producto, confiabilidad del productor, performance del packhouse, riesgo logístico, cumplimiento comercial, requisitos de mercado y tolerancia del cliente.",
+      "Dimension": "Dimensión",
+      "What it defines": "Qué define",
+      "Quality implication": "Implicancia de calidad",
+      "Product": "Producto",
+      "Base technical and commercial specification": "Especificación técnica y comercial base",
+      "Defines minimum quality standard and customer promise.": "Define el estándar mínimo de calidad y la promesa al cliente.",
+      "Variety": "Variedad",
+      "Postharvest behavior and shelf-life potential": "Comportamiento postcosecha y potencial de vida útil",
+      "Determines transit tolerance and market suitability.": "Determina tolerancia al tránsito y aptitud de mercado.",
+      "Grower": "Productor",
+      "Reliability, consistency and historical performance": "Confiabilidad, consistencia y performance histórica",
+      "Defines supervision intensity and release confidence.": "Define intensidad de supervisión y confianza de liberación.",
+      "Field / Block": "Campo / Bloque",
+      "Agronomic condition, maturity and risk profile": "Condición agronómica, madurez y perfil de riesgo",
+      "Allows lot-level decisions and traceability.": "Permite decisiones y trazabilidad a nivel de lote.",
+      "Packhouse": "Packhouse",
+      "Process capability and selection accuracy": "Capacidad de proceso y precisión de selección",
+      "Determines confidence in grading, segregation and defect control.": "Determina confianza en clasificación, segregación y control de defectos.",
+      "Lot Condition": "Condición de Lote",
+      "Actual condition at harvest, packing and pre-shipment": "Condición real en cosecha, packing y pre-embarque",
+      "Defines whether fruit is released, restricted or blocked.": "Define si la fruta se libera, restringe o bloquea.",
+      "Correct packaging, pack configuration, labeling, customer codes, traceability, net weight and overweight target": "Empaque correcto, confección, etiquetado, códigos de cliente, trazabilidad, peso neto y objetivo de sobrepeso",
+      "Prevents customer rejection, relabeling costs, underweight claims, commercial disruptions and loss of program credibility.": "Previene rechazos de cliente, costos de reetiquetado, reclamos por bajo peso, disrupciones comerciales y pérdida de credibilidad del programa.",
+      "Logistics": "Logística",
+      "Cooling performance, transit time and cold chain risk": "Desempeño de enfriamiento, tiempo de tránsito y riesgo de cadena de frío",
+      "Defines destination risk and shelf-life protection.": "Define riesgo en destino y protección de vida útil.",
+      "Early Warning / Escalation": "Alerta Temprana / Escalamiento",
+      "Timely communication of quality, compliance, logistics or arrival risk before the issue reaches destination": "Comunicación oportuna de riesgos de calidad, cumplimiento, logística o arribo antes de que el problema llegue a destino",
+      "Maximizes flexibility to adjust destination strategy, customer allocation, inspection planning, repacking, relabeling or commercial handling.": "Maximiza la flexibilidad para ajustar estrategia en destino, asignación de cliente, planificación de inspección, repacking, reetiquetado o manejo comercial.",
+      "Market": "Mercado",
+      "Transit distance, regulatory requirements and expected handling": "Distancia de tránsito, requisitos regulatorios y manejo esperado",
+      "Defines minimum condition needed for safe arrival.": "Define condición mínima necesaria para un arribo seguro.",
+      "Customer": "Cliente",
+      "Program specification, tolerance and claim sensitivity": "Especificación de programa, tolerancia y sensibilidad a reclamos",
+      "Defines final allocation and restriction level.": "Define asignación final y nivel de restricción.",
+      "Format": "Formato",
+      "Pack style, unit size, carton configuration and presentation requirement": "Estilo de empaque, tamaño de unidad, configuración de caja y requisito de presentación",
+      "Defines customer compatibility, handling exposure, weight behavior and commercial compliance risk.": "Define compatibilidad con cliente, exposición a manejo, comportamiento de peso y riesgo de cumplimiento comercial.",
+      "Key principle:": "Principio clave:",
+      "Not every acceptable lot is suitable for every customer or market. FTFS Quality Governance must define the safest and most value-accretive destination for each lot.": "No todo lote aceptable es apto para todo cliente o mercado. La Gobernanza de Calidad FTFS debe definir el destino más seguro y de mayor valor esperado para cada lote.",
+      "Lot Release & Commercial Allocation": "Liberación de Lotes y Asignación Comercial",
+      "Technical release must define whether each lot is fit to ship, under what restrictions, and for which market or customer it is commercially and technically suitable.": "La liberación técnica debe definir si cada lote es apto para embarque, bajo qué restricciones y para qué mercado o cliente es comercial y técnicamente adecuado.",
+      "Released": "Liberado",
+      "The lot meets fruit condition, commercial compliance and weight integrity requirements, and is suitable for the intended market and customer program.": "El lote cumple requisitos de condición de fruta, cumplimiento comercial e integridad de peso, y es apto para el mercado y programa de cliente previsto.",
+      "Fruit condition within standard": "Condición de fruta dentro de estándar",
+      "Packaging, label and format compliant": "Empaque, etiqueta y formato conformes",
+      "Net weight and overweight tolerance compliant": "Peso neto y tolerancia de sobrepeso conformes",
+      "Suitable for target market and customer": "Apto para mercado y cliente objetivo",
+      "Normal monitoring": "Monitoreo normal",
+      "Restricted": "Restringido",
+      "The lot is commercially usable, but requires restrictions due to fruit condition, process deviation, logistics risk or commercial compliance sensitivity.": "El lote es comercialmente usable, pero requiere restricciones por condición de fruta, desviación de proceso, riesgo logístico o sensibilidad de cumplimiento comercial.",
+      "Restricted market or customer": "Mercado o cliente restringido",
+      "Shorter transit preferred": "Preferencia por tránsito más corto",
+      "Enhanced destination monitoring": "Monitoreo reforzado en destino",
+      "Specific commercial approval required": "Aprobación comercial específica requerida",
+      "Corrective action or rework if needed": "Acción correctiva o reproceso si corresponde",
+      "Blocked / Reclassified": "Bloqueado / Reclasificado",
+      "The lot does not meet minimum fruit condition, commercial compliance or weight integrity requirements and cannot be shipped as originally intended.": "El lote no cumple requisitos mínimos de condición de fruta, cumplimiento comercial o integridad de peso, y no puede embarcarse como fue originalmente previsto.",
+      "Hold shipment": "Retener embarque",
+      "Rework, relabel or repack if possible": "Reprocesar, reetiquetar o reempacar si es posible",
+      "Downgrade or divert": "Degradar o desviar",
+      "Reject if minimum standard is not met": "Rechazar si no cumple estándar mínimo",
+      "Root-cause analysis required": "Análisis de causa raíz requerido",
+      "Release decision =": "Decisión de liberación =",
+      "fruit condition + commercial compliance + weight integrity + logistics risk + customer fit. Commercial pressure cannot override release criteria. Early warnings must be issued while there is still time to adjust destination strategy.": "condición de fruta + cumplimiento comercial + integridad de peso + riesgo logístico + calce con cliente. La presión comercial no puede sobrepasar los criterios de liberación. Las alertas tempranas deben emitirse mientras aún hay tiempo para ajustar la estrategia en destino.",
+      "FTFS Quality Governance KPIs": "KPIs de Gobernanza de Calidad FTFS",
+      "FTFS should measure quality performance across the full chain: field, harvest, packing, commercial compliance, cold chain, arrival, claims and corrective actions.": "FTFS debe medir la performance de calidad en toda la cadena: campo, cosecha, packing, cumplimiento comercial, cadena de frío, arribo, reclamos y acciones correctivas.",
+      "Field / Pre-Harvest": "Campo / Pre-cosecha",
+      "Harvest readiness": "Preparación de cosecha",
+      "Size distribution": "Distribución de calibres",
+      "Color / maturity": "Color / madurez",
+      "Defect incidence": "Incidencia de defectos",
+      "Field risk alerts": "Alertas de riesgo en campo",
+      "Block-level condition": "Condición a nivel de bloque",
+      "Harvest & Handling": "Cosecha y Manejo",
+      "Harvest timing compliance": "Cumplimiento del momento de cosecha",
+      "Field handling compliance": "Cumplimiento de manejo en campo",
+      "Harvest-to-cooling time": "Tiempo cosecha–enfriamiento",
+      "Field temperature exposure": "Exposición a temperatura en campo",
+      "Lot identity preservation": "Preservación de identidad de lote",
+      "Harvest damage incidence": "Incidencia de daño de cosecha",
+      "Packhouse Quality": "Calidad de Packhouse",
+      "Exportable %": "% Exportable",
+      "Packout %": "% Packout",
+      "Defects by type": "Defectos por tipo",
+      "Selection accuracy": "Precisión de selección",
+      "Rejected fruit %": "% Fruta rechazada",
+      "Rework %": "% Reproceso",
+      "Blocked lots": "Lotes bloqueados",
+      "Lot segregation compliance": "Cumplimiento de segregación de lotes",
+      "Packaging accuracy %": "% Precisión de empaque",
+      "Pack configuration compliance %": "% Cumplimiento de confección",
+      "Labeling accuracy %": "% Precisión de etiquetado",
+      "Traceability accuracy %": "% Precisión de trazabilidad",
+      "Customer code accuracy %": "% Precisión de código de cliente",
+      "Net weight compliance %": "% Cumplimiento de peso neto",
+      "Underweight incidence %": "% Incidencia de bajo peso",
+      "Average overweight %": "% Sobrepeso promedio",
+      "Overweight range compliance %": "% Cumplimiento de rango de sobrepeso",
+      "Giveaway cost from overweight": "Costo de giveaway por sobrepeso",
+      "Customer specification compliance %": "% Cumplimiento de especificación de cliente",
+      "Cold Chain / Logistics": "Cadena de Frío / Logística",
+      "Pulp temperature at packing": "Temperatura de pulpa en packing",
+      "Time to target temperature": "Tiempo a temperatura objetivo",
+      "Pre-cooling compliance": "Cumplimiento de pre-enfriamiento",
+      "Container temperature compliance": "Cumplimiento de temperatura de contenedor",
+      "Cold chain deviations": "Desviaciones de cadena de frío",
+      "Transit days": "Días de tránsito",
+      "Arrival temperature": "Temperatura de arribo",
+      "Arrival / Customer Performance": "Arribo / Performance de Cliente",
+      "Arrival score": "Puntaje de arribo",
+      "Firmness at destination": "Firmeza en destino",
+      "Decay %": "% Pudrición",
+      "Dehydration %": "% Deshidratación",
+      "Shrivel %": "% Shrivel",
+      "Weight compliance at destination": "Cumplimiento de peso en destino",
+      "Label / packaging compliance at destination": "Cumplimiento de etiqueta / empaque en destino",
+      "Customer acceptance": "Aceptación de cliente",
+      "Claims per kg": "Reclamos por kg",
+      "Claims cost": "Costo de reclamos",
+      "Governance & Corrective Actions": "Gobernanza y Acciones Correctivas",
+      "Grower score": "Score de productor",
+      "Packhouse score": "Score de packhouse",
+      "Corrective action closure %": "% Cierre de acciones correctivas",
+      "Repeat deviation rate": "Tasa de desviación repetida",
+      "Audit compliance %": "% Cumplimiento de auditoría",
+      "Early warning lead time": "Lead time de alerta temprana",
+      "Destination risk alerts issued on time %": "% Alertas de riesgo a destino emitidas a tiempo",
+      "Claims root-cause closure %": "% Cierre de causa raíz de reclamos",
+      "Critical deviation response time": "Tiempo de respuesta a desviación crítica",
+      "Training completion %": "% Cumplimiento de capacitación",
+      "Weight rule:": "Regla de peso:",
+      "Underweight can trigger rejection. Overweight must be managed as a controlled tolerance, generally between 2.5% and 5.0% above declared net weight, depending on fruit, format, condition, transit and timing.": "El bajo peso puede generar rechazo. El sobrepeso debe gestionarse como una tolerancia controlada, generalmente entre 2.5% y 5.0% sobre el peso neto declarado, dependiendo de fruta, formato, condición, tránsito y momento.",
+      "High consistency, low claims, strong internal QC, reliable traceability and strong packhouse discipline.": "Alta consistencia, bajos reclamos, QC interno sólido, trazabilidad confiable y fuerte disciplina de packhouse.",
+      "Standard monitoring, priority access to demanding programs and greater operating autonomy.": "Monitoreo estándar, acceso prioritario a programas exigentes y mayor autonomía operativa.",
+      "Generally compliant, with manageable variability or occasional deviations.": "Generalmente conforme, con variabilidad manejable o desviaciones ocasionales.",
+      "Normal supervision, periodic audits and targeted improvement actions.": "Supervisión normal, auditorías periódicas y acciones de mejora focalizadas.",
+      "Recurrent deviations, weak process discipline, inconsistent arrivals or incomplete corrective action closure.": "Desviaciones recurrentes, débil disciplina de proceso, arribos inconsistentes o cierre incompleto de acciones correctivas.",
+      "Intensive audits, restricted market access and mandatory corrective action plan.": "Auditorías intensivas, acceso restringido a mercados y plan de acción correctiva obligatorio.",
+      "Critical non-compliance, repeated failures, traceability gaps, underweight risk, labeling failures or unresolved claims.": "Incumplimiento crítico, fallas repetidas, brechas de trazabilidad, riesgo de bajo peso, fallas de etiquetado o reclamos no resueltos.",
+      "Suspension, blocked shipments, re-approval process or exit from program.": "Suspensión, embarques bloqueados, proceso de reaprobación o salida del programa.",
+      "Classification criteria:": "Criterios de clasificación:",
+      "arrival performance, claims per kg, packhouse compliance, commercial compliance at origin, traceability accuracy, cold chain discipline, corrective action closure, repeat deviation rate, audit results and customer suitability. Control intensity must reflect performance, risk and reliability.": "performance de arribo, reclamos por kg, cumplimiento de packhouse, cumplimiento comercial en origen, precisión de trazabilidad, disciplina de cadena de frío, cierre de acciones correctivas, tasa de desviación repetida, resultados de auditoría y aptitud por cliente. La intensidad de control debe reflejar performance, riesgo y confiabilidad.",
+      "RCA Flow": "Flujo RCA",
+      "Claim received": "Reclamo recibido",
+      "Lot identified": "Lote identificado",
+      "Evidence collected": "Evidencia recopilada",
+      "Origin records reviewed": "Registros de origen revisados",
+      "Destination confirmation reviewed": "Confirmación de destino revisada",
+      "Root cause classified": "Causa raíz clasificada",
+      "Responsibility assigned": "Responsabilidad asignada",
+      "Corrective action defined": "Acción correctiva definida",
+      "Follow-up completed": "Seguimiento completado",
+      "Standard / protocol updated if needed": "Estándar / protocolo actualizado si corresponde",
+      "Root Cause Buckets": "Categorías de Causa Raíz",
+      "Field / Pre-harvest": "Campo / Pre-cosecha",
+      "Packing & Selection": "Packing y Selección",
+      "Commercial Compliance": "Cumplimiento Comercial",
+      "Weight Management": "Gestión de Peso",
+      "Cooling / Cold Chain": "Enfriamiento / Cadena de Frío",
+      "Logistics / Transit": "Logística / Tránsito",
+      "Market Allocation": "Asignación de Mercado",
+      "Destination Handling": "Manejo en Destino",
+      "Customer-Specific Issue": "Tema Específico de Cliente",
+      "Claims must be treated as system feedback, not isolated commercial incidents.": "Los reclamos deben tratarse como feedback del sistema, no como incidentes comerciales aislados.",
+      "The purpose of RCA is not only to assign blame. It is to prevent recurrence.": "El propósito del RCA no es solo asignar culpa. Es prevenir recurrencia.",
+      "Quality as a Commercial Value Enabler": "Calidad como Habilitador de Valor Comercial",
+      "Quality does not replace Commercial. It defines the technical boundaries and risk profile that allow Commercial to maximize value safely.": "Calidad no reemplaza a Comercial. Define los límites técnicos y el perfil de riesgo que permiten a Comercial maximizar valor de forma segura.",
+      "Quality Provides": "Calidad Provee",
+      "Lot release status": "Estado de liberación de lote",
+      "Market and customer restrictions": "Restricciones de mercado y cliente",
+      "Fruit condition risk profile": "Perfil de riesgo de condición de fruta",
+      "Commercial compliance status": "Estado de cumplimiento comercial",
+      "Weight integrity status": "Estado de integridad de peso",
+      "Grower reliability": "Confiabilidad del productor",
+      "Packhouse performance": "Performance del packhouse",
+      "Arrival feedback": "Feedback de arribo",
+      "Shelf-life intelligence": "Inteligencia de vida útil",
+      "Early warnings and destination risk alerts": "Alertas tempranas y alertas de riesgo a destino",
+      "Claims and RCA insights": "Insights de reclamos y RCA",
+      "Commercial Decides": "Comercial Decide",
+      "Customer allocation within release criteria": "Asignación de cliente dentro de criterios de liberación",
+      "Program commitments": "Compromisos de programa",
+      "Pricing strategy": "Estrategia de precio",
+      "Market destination": "Destino de mercado",
+      "Volume planning": "Planificación de volumen",
+      "Customer relationship": "Relación con cliente",
+      "Final commercial execution": "Ejecución comercial final",
+      "Destination strategy adjustment when timely alerts are received": "Ajuste de estrategia en destino cuando se reciben alertas oportunas",
+      "Value maximization within technical boundaries": "Maximización de valor dentro de límites técnicos",
+      "Quality defines the risk. Commercial decides the value strategy within that risk. The best commercial decision is not always the highest price destination; it is the destination that maximizes expected value after quality and logistics risk. Timely alerts increase the available options before fruit arrives.": "Calidad define el riesgo. Comercial decide la estrategia de valor dentro de ese riesgo. La mejor decisión comercial no siempre es el destino de mayor precio; es el destino que maximiza el valor esperado después de considerar calidad y riesgo logístico. Las alertas oportunas aumentan las opciones disponibles antes de que llegue la fruta.",
+      "Feedback to Variety & Program Strategy": "Feedback a la Estrategia Varietal y del Programa",
+      "The best varieties are not only productive. They must travel well, comply commercially, arrive well and sell well.": "Las mejores variedades no son solo productivas. Deben viajar bien, cumplir comercialmente, arribar bien y venderse bien.",
+      "Postharvest Performance": "Performance Postcosecha",
+      "Firmness, decay, dehydration, bloom retention, weight loss and shelf-life behavior by variety, grower and packhouse.": "Firmeza, pudrición, deshidratación, retención de bloom, pérdida de peso y comportamiento de vida útil por variedad, productor y packhouse.",
+      "Market & Customer Fit": "Calce con Mercado y Cliente",
+      "Identifies which varieties, growers and lot profiles perform best by market, customer, transit time and program requirement.": "Identifica qué variedades, productores y perfiles de lote funcionan mejor por mercado, cliente, tiempo de tránsito y requisito de programa.",
+      "Grower / Field Fit": "Calce Productor / Campo",
+      "Shows how each variety performs under different growers, fields, agronomic conditions and operational capabilities within Peru.": "Muestra cómo se comporta cada variedad bajo distintos productores, campos, condiciones agronómicas y capacidades operativas dentro de Perú.",
+      "Program Development Logic": "Lógica de Desarrollo del Programa",
+      "Supports decisions on variety expansion, renewal, grower prioritization, technical support, market restrictions and long-term program strategy.": "Soporta decisiones sobre expansión varietal, renovación, priorización de productores, soporte técnico, restricciones de mercado y estrategia de largo plazo del programa.",
+      "Strategic use:": "Uso estratégico:",
+      "FTFS quality data should become strategic intelligence for the FTF program, not only operational reporting. If a variety produces well but does not travel, arrive or comply well, its commercial value is structurally limited.": "Los datos de calidad de FTFS deben convertirse en inteligencia estratégica para el programa FTF, no solo en reporting operativo. Si una variedad produce bien pero no viaja, arriba o cumple bien, su valor comercial está estructuralmente limitado.",
+      "Governance Rhythm": "Ritmo de Gobernanza",
+      "Quality governance requires a defined management rhythm, clear escalation rules and explicit decision rights.": "La gobernanza de calidad requiere un ritmo de gestión definido, reglas claras de escalamiento y derechos explícitos de decisión.",
+      "Weekly during active harvest / packing / shipping season": "Semanal durante temporada activa de cosecha / packing / embarque",
+      "Weekly Operational Quality Review": "Revisión Operativa Semanal de Calidad",
+      "Focus: fruit to be harvested, packed, released, shipped or restricted.": "Foco: fruta por cosechar, empacar, liberar, embarcar o restringir.",
+      "Fruit to be harvested": "Fruta por cosechar",
+      "Fruit packed / released": "Fruta empacada / liberada",
+      "Fruit in transit": "Fruta en tránsito",
+      "Quality alerts and destination-relevant early warnings": "Alertas de calidad y alertas tempranas relevantes para destino",
+      "Commercial and weight compliance issues": "Temas de cumplimiento comercial y peso",
+      "Restricted or blocked lots": "Lotes restringidos o bloqueados",
+      "Corrective actions in progress": "Acciones correctivas en curso",
+      "Monthly in season / quarterly off season": "Mensual en temporada / trimestral fuera de temporada",
+      "FTFS Quality Governance Committee": "Comité de Gobernanza de Calidad FTFS",
+      "Focus: grower, packhouse, arrival, claims, compliance and corrective action performance.": "Foco: performance de productor, packhouse, arribo, reclamos, cumplimiento y acciones correctivas.",
+      "Performance by grower and packhouse": "Performance por productor y packhouse",
+      "Arrival results": "Resultados de arribo",
+      "Claims and RCA status": "Estado de reclamos y RCA",
+      "Commercial compliance trends": "Tendencias de cumplimiento comercial",
+      "Weight management trends": "Tendencias de gestión de peso",
+      "Grower classification updates": "Actualizaciones de clasificación de productores",
+      "Protocol adjustments": "Ajustes de protocolo",
+      "End of season / pre-season planning cycle": "Fin de temporada / ciclo de planificación pre-temporada",
+      "Seasonal / Post-Season Quality Review": "Revisión de Calidad de Temporada / Post-temporada",
+      "Focus: season learnings, claims, arrivals, commercial compliance, weight management, variety performance and next-season improvement plan.": "Foco: aprendizajes de temporada, reclamos, arribos, cumplimiento comercial, gestión de peso, performance varietal y plan de mejora para la siguiente temporada.",
+      "Season quality performance": "Performance de calidad de temporada",
+      "Claims and cost of claims": "Reclamos y costo de reclamos",
+      "Grower scorecard results": "Resultados de scorecards de productores",
+      "Protocol effectiveness": "Efectividad de protocolos",
+      "Training plan": "Plan de capacitación",
+      "Program priorities": "Prioridades del programa",
+      "Governance converts data into decisions, decisions into action, and action into improved performance.": "La gobernanza convierte datos en decisiones, decisiones en acción y acción en mejor performance.",
+      "Required Authority": "Autoridad Requerida",
+      "Without authority, FTFS Quality Governance becomes advisory. With authority, data and escalation rights, it becomes a value-protection system for the program.": "Sin autoridad, la Gobernanza de Calidad FTFS se vuelve consultiva. Con autoridad, datos y derechos de escalamiento, se convierte en un sistema de protección de valor para el programa.",
+      "Approve": "Aprobar",
+      "Approve FTFS quality standards, specifications, release criteria, inspection protocols and commercial compliance requirements.": "Aprobar estándares de calidad FTFS, especificaciones, criterios de liberación, protocolos de inspección y requisitos de cumplimiento comercial.",
+      "Verify": "Verificar",
+      "Verify compliance across growers, fields, packhouses, commercial specifications, cold chain and pre-shipment release.": "Verificar cumplimiento en productores, campos, packhouses, especificaciones comerciales, cadena de frío y liberación pre-embarque.",
+      "Restrict": "Restringir",
+      "Restrict lots, growers, packhouses, markets or customers when the risk profile does not support the intended allocation.": "Restringir lotes, productores, packhouses, mercados o clientes cuando el perfil de riesgo no soporta la asignación prevista.",
+      "Block": "Bloquear",
+      "Block lots that do not meet minimum fruit condition, commercial compliance or weight integrity requirements.": "Bloquear lotes que no cumplen requisitos mínimos de condición de fruta, cumplimiento comercial o integridad de peso.",
+      "Escalate": "Escalar",
+      "Escalate critical deviations, repeated failures, customer-sensitive issues, destination-relevant risks or unresolved corrective actions to FTFS management and Commercial while adjustment options still exist.": "Escalar desviaciones críticas, fallas repetidas, temas sensibles para clientes, riesgos relevantes para destino o acciones correctivas no resueltas a gerencia FTFS y Comercial mientras aún existan opciones de ajuste.",
+      "Correct": "Corregir",
+      "Require corrective action plans, verify closure and update protocols when repeated deviations show a system weakness.": "Exigir planes de acción correctiva, verificar cierre y actualizar protocolos cuando desviaciones repetidas evidencien una debilidad del sistema.",
+      "FTFS Quality Governance must have enough authority to protect the program before risk reaches the customer.": "La Gobernanza de Calidad FTFS debe tener suficiente autoridad para proteger el programa antes de que el riesgo llegue al cliente.",
+      "Authority must be tied to data, traceability and clearly defined release criteria.": "La autoridad debe estar vinculada a datos, trazabilidad y criterios de liberación claramente definidos.",
+      "Executive Summary": "Resumen Ejecutivo",
+      "The closing thesis of the FTFS Quality Governance Model.": "La tesis de cierre del Modelo de Gobernanza de Calidad FTFS.",
+      "FTFS Quality Governance is the system that allows the Peru platform to convert a diverse network of growers, fields and packhouses into one consistent, reliable and commercially disciplined supply program.": "La Gobernanza de Calidad FTFS es el sistema que permite a la plataforma Perú convertir una red diversa de productores, campos y packhouses en un programa de abastecimiento consistente, confiable y comercialmente disciplinado.",
+      "The purpose of FTFS Quality Governance is not only to avoid claims. It is to protect program value, anticipate risk, ensure reliable arrivals and enable better commercial decisions through discipline, data, timely alerts and accountability.": "El propósito de la Gobernanza de Calidad FTFS no es solo evitar reclamos. Es proteger el valor del programa, anticipar riesgos, asegurar arribos confiables y habilitar mejores decisiones comerciales mediante disciplina, datos, alertas oportunas y accountability.",
+      "One technical standard": "Un estándar técnico",
+      "Common criteria for growers, fields, packhouses, lots, formats and customers.": "Criterios comunes para productores, campos, packhouses, lotes, formatos y clientes.",
+      "Clear accountability": "Accountability clara",
+      "FTFS governs the system while growers and packhouses remain responsible for compliance.": "FTFS gobierna el sistema mientras productores y packhouses siguen siendo responsables del cumplimiento.",
+      "Disciplined release": "Liberación disciplinada",
+      "Release decisions based on fruit condition, commercial compliance and weight integrity.": "Decisiones de liberación basadas en condición de fruta, cumplimiento comercial e integridad de peso.",
+      "Full traceability": "Trazabilidad completa",
+      "Field-to-arrival visibility for performance, claims and corrective action.": "Visibilidad campo-arribo para performance, reclamos y acciones correctivas.",
+      "Claims, RCA, scorecards, early warnings and governance rhythm drive system learning.": "Reclamos, RCA, scorecards, alertas tempranas y ritmo de gobernanza impulsan el aprendizaje del sistema.",
+      "FTFS Peru · Quality Governance Model · Draft for internal discussion": "FTFS Perú · Modelo de Gobernanza de Calidad · Borrador para discusión interna"
+};
+
+    function translateNodeText(text, lang) {
+      if (lang === "es") {
+        return translationsES[text] || text;
+      }
+      const entry = Object.entries(translationsES).find(([en, es]) => es === text);
+      return entry ? entry[0] : text;
+    }
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById("langBtnEn").classList.toggle("active", lang === "en");
+      document.getElementById("langBtnEs").classList.toggle("active", lang === "es");
+
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement.closest(".lang-toggle")) return NodeFilter.FILTER_REJECT;
+          if (["SCRIPT", "STYLE"].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      nodes.forEach(node => {
+        const originalWhitespacePrefix = node.nodeValue.match(/^\s*/)[0];
+        const originalWhitespaceSuffix = node.nodeValue.match(/\s*$/)[0];
+        const trimmed = node.nodeValue.trim();
+        const translated = translateNodeText(trimmed, lang);
+        node.nodeValue = originalWhitespacePrefix + translated + originalWhitespaceSuffix;
+      });
+
+      localStorage.setItem("ftfsLang", lang);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("langBtnEn").addEventListener("click", () => setLanguage("en"));
+      document.getElementById("langBtnEs").addEventListener("click", () => setLanguage("es"));
+      setLanguage(localStorage.getItem("ftfsLang") || "en");
+    });
 
 
     const buttons = document.querySelectorAll('.nav-btn');
