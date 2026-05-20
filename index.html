@@ -596,7 +596,7 @@
 </head>
 
 <body>
-  <a class="pdf-download-fixed" href="FTFS_Quality_Governance_Model.pdf" download>Download PDF</a>
+  <a class="pdf-download-fixed" href="#" onclick="forceDownloadPDF(event)">Download PDF</a>
 
   <div class="app">
     <aside>
@@ -1100,6 +1100,36 @@
   </div>
 
   <script>
+
+    async function forceDownloadPDF(event) {
+      event.preventDefault();
+
+      const fileName = "FTFS_Quality_Governance_Model.pdf";
+      const fallbackUrl = fileName;
+
+      try {
+        const response = await fetch(fallbackUrl, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error("PDF file not found or unavailable.");
+        }
+
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+
+        link.remove();
+        window.URL.revokeObjectURL(blobUrl);
+      } catch (error) {
+        window.open(fallbackUrl, "_blank");
+      }
+    }
+
     const buttons = document.querySelectorAll('.nav-btn');
     const sections = document.querySelectorAll('.section');
 
